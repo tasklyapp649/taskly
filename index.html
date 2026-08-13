@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taskly — Transforme tes objectifs en actions</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f7f8fc;
+      color: #15171c;
+    }
+
+    header {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      background: rgba(255,255,255,0.9);
+      border-bottom: 1px solid #e8e9ee;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #635bff;
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #555963;
+      font-size: 14px;
+    }
+
+    .nav-button {
+      background: #15171c;
+      color: white;
+      padding: 11px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: auto;
+      padding: 95px 25px 70px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #eeecff;
+      color: #554cff;
+      padding: 8px 14px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: clamp(45px, 7vw, 78px);
+      line-height: 0.98;
+      letter-spacing: -4px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1 span {
+      color: #635bff;
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin: 28px auto;
+      color: #666a74;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .main-button {
+      display: inline-block;
+      background: #635bff;
+      color: white;
+      text-decoration: none;
+      padding: 16px 27px;
+      border-radius: 13px;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(99,91,255,0.25);
+    }
+
+    .subtext {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #92959d;
+    }
+
+    .demo {
+      max-width: 900px;
+      margin: 30px auto 100px;
+      padding: 0 20px;
+    }
+
+    .app-card {
+      background: white;
+      border: 1px solid #e5e6eb;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 25px 70px rgba(25,25,40,0.08);
+      text-align: left;
+    }
+
+    .app-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .app-title {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #eeecff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #635bff;
+      font-weight: 800;
+    }
+
+    .goal {
+      border: 1px solid #e9e9ee;
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 15px;
+    }
+
+    .goal-title {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 13px;
+      font-weight: 700;
+    }
+
+    .progress {
+      width: 100%;
+      height: 9px;
+      background: #eeeeF3;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 68%;
+      background: #635bff;
+      border-radius: 20px;
+    }
+
+    .section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 70px 25px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 40px;
+      letter-spacing: -2px;
+      margin-bottom: 15px;
+    }
+
+    .section-description {
+      max-width: 600px;
+      margin: 0 auto 45px;
+      text-align: center;
+      color: #70737c;
+      line-height: 1.6;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature {
+      background: white;
+      border: 1px solid #e7e8ed;
+      padding: 28px;
+      border-radius: 20px;
+    }
+
+    .feature-icon {
+      font-size: 30px;
+      margin-bottom: 18px;
+    }
+
+    .feature h3 {
+      margin-bottom: 10px;
+    }
+
+    .feature p {
+      color: #71747d;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .pricing {
+      max-width: 900px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .price-card {
+      background: white;
+      border: 1px solid #e3e4e9;
+      border-radius: 22px;
+      padding: 32px;
+    }
+
+    .price-card.pro {
+      border: 2px solid #635bff;
+    }
+
+    .price {
+      font-size: 42px;
+      font-weight: 800;
+      margin: 15px 0;
+    }
+
+    .price span {
+      font-size: 14px;
+      color: #777;
+      font-weight: 400;
+    }
+
+    .price-card ul {
+      list-style: none;
+      margin: 25px 0;
+    }
+
+    .price-card li {
+      margin: 12px 0;
+      color: #555963;
+    }
+
+    .price-button {
+      display: block;
+      text-align: center;
+      padding: 13px;
+      border-radius: 11px;
+      background: #15171c;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .pro .price-button {
+      background: #635bff;
+    }
+
+    footer {
+      margin-top: 70px;
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 1px solid #e5e6eb;
+      color: #858891;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      nav a:not(.nav-button) {
+        display: none;
+      }
+
+      .features,
+      .pricing {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      .hero {
+        padding-top: 65px;
+      }
+
+      .app-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">task<span>ly</span></div>
+
+    <nav>
+      <a href="#fonctionnement">Comment ça marche</a>
+      <a href="#prix">Tarifs</a>
+      <a href="#" class="nav-button">Se connecter</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero">
+
+      <div class="badge">✨ Ton coach personnel propulsé par l'IA</div>
+
+      <h1>
+        Transforme tes objectifs
+        en <span>actions.</span>
+      </h1>
+
+      <p>
+        Taskly transforme ce que tu veux accomplir en un
+        programme simple, personnalisé et réalisable chaque jour.
+      </p>
+
+      <a href="#" class="main-button">
+        Commencer gratuitement →
+      </a>
+
+      <div class="subtext">
+        Aucune carte bancaire nécessaire.
+      </div>
+
+    </section>
+
+    <section class="demo">
+
+      <div class="app-card">
+
+        <div class="app-top">
+          <div class="app-title">Bonjour 👋</div>
+          <div class="avatar">S</div>
+        </div>
+
+        <p style="color:#777; margin-bottom:20px;">
+          Voici tes objectifs actuels.
+        </p>
+
+        <div class="goal">
+
+          <div class="goal-title">
+            <span>🏃 Courir 5 km en 25 min</span>
+            <span style="color:#635bff;">68%</span>
+          </div>
+
+          <div class="progress">
+            <div class="progress-bar"></div>
+          </div>
+
+        </div>
+
+        <div class="goal">
+
+          <div class="goal-title">
+            <span>📚 Apprendre l'anglais</span>
+            <span style="color:#635bff;">42%</span>
+          </div>
+
+          <div class="progress">
+            <div
+              class="progress-bar"
+              style="width:42%;">
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="section" id="fonctionnement">
+
+      <h2 class="section-title">
+        Un objectif.
+        Un plan.
+        Une progression.
+      </h2>
+
+      <p class="section-description">
+        Tu expliques simplement ce que tu veux accomplir.
+        Taskly s'occupe de transformer ton objectif en petites
+        actions quotidiennes.
+      </p>
+
+      <div class="features">
+
+        <div class="feature">
+
+          <div class="feature-icon">🎯</div>
+
+          <h3>Définis ton objectif</h3>
+
+          <p>
+            Explique simplement ce que tu veux atteindre,
+            même si tu ne sais pas encore comment y arriver.
+          </p>
+
+        </div>
+
+        <div class="feature">
+
+          <div class="feature-icon">🤖</div>
+
+          <h3>L'IA crée ton plan</h3>
+
+          <p>
+            Taskly analyse ton objectif et construit
+            un programme adapté à ton temps et ton niveau.
+          </p>
+
+        </div>
+
+        <div class="feature">
+
+          <div class="feature-icon">📈</div>
+
+          <h3>Progresse chaque jour</h3>
+
+          <p>
+            Coche tes tâches, suis ta progression et adapte
+            ton programme lorsque quelque chose ne se passe pas comme prévu.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="section" id="prix">
+
+      <h2 class="section-title">
+        Simple et accessible.
+      </h2>
+
+      <p class="section-description">
+        Commence gratuitement. Passe à Pro uniquement
+        lorsque tu as besoin de plus.
+      </p>
+
+      <div class="pricing">
+
+        <div class="price-card">
+
+          <h3>Free</h3>
+
+          <div class="price">
+            0€ <span>/ mois</span>
+          </div>
+
+          <ul>
+            <li>✓ 1 objectif</li>
+            <li>✓ Plan personnalisé</li>
+            <li>✓ Suivi de progression</li>
+            <li>✓ 3 générations IA / semaine</li>
+          </ul>
+
+          <a href="#" class="price-button">
+            Commencer
+          </a>
+
+        </div>
+
+        <div class="price-card pro">
+
+          <h3>Taskly Pro</h3>
+
+          <div class="price">
+            4,99€ <span>/ mois</span>
+          </div>
+
+          <ul>
+            <li>✓ Objectifs illimités</li>
+            <li>✓ Coach IA</li>
+            <li>✓ Adaptation automatique</li>
+            <li>✓ Statistiques avancées</li>
+            <li>✓ Historique complet</li>
+          </ul>
+
+          <a href="#" class="price-button">
+            Passer à Pro
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Taskly — Transforme tes objectifs en actions.
+  </footer>
+
+</body>
+</html>
