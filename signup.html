@@ -188,9 +188,75 @@
     </div>
 
   </div>
+
 <script>
   const form = document.querySelector("form");
 
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    console.log("1 - Formulaire envoyé");
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    console.log("2 - Données récupérées");
+
+    if (!supabase) {
+      alert("Erreur : Supabase n'est pas chargé.");
+      return;
+    }
+
+    console.log("3 - Supabase chargé");
+
+    const button = form.querySelector("button");
+
+    button.disabled = true;
+    button.textContent = "Création du compte...";
+
+    try {
+
+      const { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            first_name: name
+          }
+        }
+      });
+
+      console.log("4 - Réponse Supabase", data, error);
+
+      if (error) {
+        alert("Erreur Supabase : " + error.message);
+
+        button.disabled = false;
+        button.textContent = "Créer mon compte gratuitement";
+
+        return;
+      }
+
+      alert(
+        "Compte créé ! Vérifie ton adresse e-mail."
+      );
+
+      window.location.href = "login.html";
+
+    } catch (error) {
+
+      console.error("Erreur inattendue :", error);
+
+      alert(
+        "Erreur inattendue : " + error.message
+      );
+
+      button.disabled = false;
+      button.textContent = "Créer mon compte gratuitement";
+    }
+  });
+</script>
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
