@@ -12,7 +12,6 @@
 
   <title>Dashboard — Taskly</title>
 
-
   <style>
 
     * {
@@ -22,7 +21,6 @@
     }
 
     body {
-
       font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -30,297 +28,181 @@
         sans-serif;
 
       background: #f7f8fc;
-
       color: #15171c;
-
       min-height: 100vh;
-
     }
 
-
     header {
-
       height: 72px;
-
       background: white;
-
-      border-bottom:
-        1px solid #e7e8ed;
+      border-bottom: 1px solid #e7e8ed;
 
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
 
       padding: 0 6%;
-
     }
-
 
     .logo {
-
       font-size: 24px;
-
       font-weight: 800;
-
     }
-
 
     .logo span {
-
       color: #635bff;
-
     }
 
-
     .logout {
-
       border: none;
-
       background: #f0f0f4;
 
       padding: 10px 15px;
-
       border-radius: 9px;
 
       cursor: pointer;
-
       font-weight: 600;
-
     }
-
 
     main {
-
       max-width: 1100px;
-
       margin: auto;
-
       padding: 45px 20px 80px;
-
     }
-
 
     .welcome {
-
       margin-bottom: 35px;
-
     }
-
 
     .welcome h1 {
-
       font-size: 38px;
-
       letter-spacing: -1.5px;
-
       margin-bottom: 8px;
-
     }
-
 
     .welcome p {
-
       color: #73767f;
-
     }
-
 
     .top-grid {
-
       display: grid;
-
-      grid-template-columns:
-        1.5fr 1fr;
+      grid-template-columns: 1.5fr 1fr;
 
       gap: 20px;
-
       margin-bottom: 35px;
-
     }
-
 
     .card {
-
       background: white;
-
-      border:
-        1px solid #e5e6eb;
+      border: 1px solid #e5e6eb;
 
       border-radius: 20px;
-
       padding: 25px;
-
     }
-
 
     .coach {
-
       background: #635bff;
-
       color: white;
-
       border: none;
-
     }
-
 
     .coach h2 {
-
       margin-bottom: 10px;
-
     }
-
 
     .coach p {
-
       opacity: 0.9;
-
       line-height: 1.5;
-
       margin-bottom: 20px;
-
     }
 
-
     .coach button {
-
       border: none;
-
       background: white;
-
       color: #635bff;
 
       padding: 12px 18px;
-
       border-radius: 10px;
 
       font-weight: 700;
-
       cursor: pointer;
-
     }
-
 
     .stats {
-
       display: grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
+      grid-template-columns: repeat(2, 1fr);
 
       gap: 15px;
-
       margin-top: 20px;
-
     }
-
 
     .stat-number {
-
       font-size: 28px;
-
       font-weight: 800;
-
     }
-
 
     .stat-label {
-
       color: #777a83;
-
       font-size: 13px;
-
     }
 
-
     .section-header {
-
       display: flex;
-
       justify-content: space-between;
-
       align-items: center;
 
       margin-bottom: 18px;
-
     }
-
 
     .section-header h2 {
-
       font-size: 24px;
-
     }
 
-
     .add-button {
-
       border: none;
-
       background: #635bff;
-
       color: white;
 
       padding: 11px 16px;
-
       border-radius: 10px;
 
       font-weight: 700;
-
       cursor: pointer;
-
     }
 
+    .add-button:hover {
+      opacity: 0.9;
+    }
 
     .empty {
-
       text-align: center;
 
       padding: 55px 20px;
 
       background: white;
 
-      border:
-        1px dashed #d8d9df;
+      border: 1px dashed #d8d9df;
 
       border-radius: 20px;
-
     }
-
 
     .empty-icon {
-
       font-size: 45px;
-
       margin-bottom: 15px;
-
     }
-
 
     .empty h3 {
-
       margin-bottom: 8px;
-
     }
-
 
     .empty p {
-
       color: #777a83;
-
       margin-bottom: 20px;
-
     }
 
-
     .empty button {
-
       border: none;
-
       background: #635bff;
-
       color: white;
 
       padding: 13px 20px;
@@ -328,32 +210,250 @@
       border-radius: 10px;
 
       font-weight: 700;
+      cursor: pointer;
+    }
+
+    .goals {
+      display: grid;
+      gap: 15px;
+    }
+
+    .goal {
+      background: white;
+
+      border: 1px solid #e5e6eb;
+
+      border-radius: 18px;
+
+      padding: 20px;
+
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .goal-info h3 {
+      margin-bottom: 7px;
+    }
+
+    .goal-info p {
+      color: #777a83;
+      font-size: 14px;
+    }
+
+    .goal-category {
+      display: inline-block;
+
+      margin-bottom: 8px;
+
+      padding: 5px 9px;
+
+      border-radius: 8px;
+
+      background: #f0efff;
+
+      color: #635bff;
+
+      font-size: 12px;
+
+      font-weight: 700;
+    }
+
+    .delete-goal {
+      border: none;
+
+      background: #fff0f0;
+
+      color: #b42318;
+
+      padding: 9px 12px;
+
+      border-radius: 9px;
 
       cursor: pointer;
 
+      font-weight: 600;
     }
 
+    .modal {
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(15, 15, 25, 0.45);
+
+      display: none;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      z-index: 10;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 500px;
+
+      background: white;
+
+      border-radius: 22px;
+
+      padding: 28px;
+
+      max-height: 90vh;
+
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      margin-bottom: 25px;
+    }
+
+    .close {
+      border: none;
+
+      background: #f0f0f4;
+
+      width: 35px;
+      height: 35px;
+
+      border-radius: 50%;
+
+      font-size: 18px;
+
+      cursor: pointer;
+    }
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    .form-group label {
+      display: block;
+
+      font-size: 14px;
+
+      font-weight: 600;
+
+      margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+
+      border: 1px solid #dfe1e7;
+
+      border-radius: 10px;
+
+      padding: 13px;
+
+      font-size: 15px;
+
+      font-family: inherit;
+
+      outline: none;
+    }
+
+    .form-group textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #635bff;
+    }
+
+    .modal-submit {
+      width: 100%;
+
+      border: none;
+
+      background: #635bff;
+
+      color: white;
+
+      padding: 14px;
+
+      border-radius: 11px;
+
+      font-weight: 700;
+
+      font-size: 15px;
+
+      cursor: pointer;
+
+      margin-top: 5px;
+    }
+
+    .modal-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+
+      padding: 12px;
+
+      border-radius: 10px;
+
+      font-size: 14px;
+
+      margin-bottom: 15px;
+    }
+
+    .message.show {
+      display: block;
+    }
+
+    .message.error {
+      background: #fff0f0;
+      color: #b42318;
+    }
+
+    .message.success {
+      background: #eefbf3;
+      color: #16794c;
+    }
 
     @media (max-width: 700px) {
 
       .top-grid {
-
         grid-template-columns: 1fr;
-
       }
-
 
       .welcome h1 {
-
         font-size: 31px;
-
       }
 
-
       header {
-
         padding: 0 20px;
+      }
 
+      .goal {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .delete-goal {
+        width: 100%;
       }
 
     }
@@ -366,241 +466,893 @@
 <body>
 
 
-  <header>
+<header>
 
-    <div class="logo">
-      task<span>ly</span>
+  <div class="logo">
+    task<span>ly</span>
+  </div>
+
+  <button
+    id="logoutButton"
+    class="logout"
+  >
+    Se déconnecter
+  </button>
+
+</header>
+
+
+<main>
+
+
+  <section class="welcome">
+
+    <h1 id="welcomeTitle">
+      Bonjour 👋
+    </h1>
+
+    <p>
+      Voici ton espace personnel Taskly.
+    </p>
+
+  </section>
+
+
+  <section class="top-grid">
+
+
+    <div class="card coach">
+
+      <h2>
+        🤖 Ton coach IA
+      </h2>
+
+      <p>
+        Dis-moi ce que tu veux accomplir et
+        Taskly construira progressivement
+        un plan personnalisé.
+      </p>
+
+      <button disabled>
+        Bientôt disponible
+      </button>
+
     </div>
 
 
-    <button
-      id="logoutButton"
-      class="logout"
+    <div class="card">
+
+      <h3>
+        Ta progression
+      </h3>
+
+      <div class="stats">
+
+        <div>
+
+          <div
+            class="stat-number"
+            id="goalCount"
+          >
+            0
+          </div>
+
+          <div class="stat-label">
+            Objectifs
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <div class="stat-number">
+            0
+          </div>
+
+          <div class="stat-label">
+            Jours actifs
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section>
+
+    <div class="section-header">
+
+      <h2>
+        🎯 Mes objectifs
+      </h2>
+
+      <button
+        id="openModalButton"
+        class="add-button"
+      >
+        + Nouvel objectif
+      </button>
+
+    </div>
+
+
+    <div
+      id="emptyState"
+      class="empty"
     >
-      Se déconnecter
-    </button>
 
-  </header>
+      <div class="empty-icon">
+        🎯
+      </div>
 
-
-  <main>
-
-
-    <section class="welcome">
-
-      <h1 id="welcomeTitle">
-        Bonjour 👋
-      </h1>
+      <h3>
+        Aucun objectif pour le moment
+      </h3>
 
       <p>
-        Voici ton espace personnel Taskly.
+        Crée ton premier objectif et commence
+        à avancer vers ton résultat.
       </p>
 
-    </section>
+      <button id="emptyAddButton">
+        Créer mon premier objectif
+      </button>
+
+    </div>
 
 
-    <section class="top-grid">
+    <div
+      id="goalsList"
+      class="goals"
+    ></div>
+
+  </section>
 
 
-      <div class="card coach">
+</main>
 
-        <h2>
-          🤖 Ton coach IA
-        </h2>
 
-        <p>
-          Dis-moi ce que tu veux accomplir et
-          Taskly construira progressivement
-          un plan personnalisé.
-        </p>
+<!-- MODALE DE CRÉATION -->
 
-        <button disabled>
-          Bientôt disponible
-        </button>
+<div
+  id="goalModal"
+  class="modal"
+>
+
+  <div class="modal-card">
+
+    <div class="modal-header">
+
+      <h2>
+        Nouvel objectif
+      </h2>
+
+      <button
+        id="closeModalButton"
+        class="close"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      id="modalMessage"
+      class="message"
+    ></div>
+
+
+    <form id="goalForm">
+
+
+      <div class="form-group">
+
+        <label for="goalTitle">
+          Quel est ton objectif ?
+        </label>
+
+        <input
+          id="goalTitle"
+          type="text"
+          placeholder="Ex : Courir 5 km"
+          required
+        >
 
       </div>
 
 
-      <div class="card">
+      <div class="form-group">
 
-        <h3>
-          Ta progression
-        </h3>
+        <label for="goalCategory">
+          Catégorie
+        </label>
+
+        <select
+          id="goalCategory"
+          required
+        >
+
+          <option value="">
+            Choisir une catégorie
+          </option>
+
+          <option value="Sport">
+            🏃 Sport
+          </option>
+
+          <option value="Études">
+            📚 Études
+          </option>
+
+          <option value="Travail">
+            💼 Travail
+          </option>
+
+          <option value="Argent">
+            💰 Argent
+          </option>
+
+          <option value="Personnel">
+            🌱 Personnel
+          </option>
+
+          <option value="Autre">
+            ✨ Autre
+          </option>
+
+        </select>
+
+      </div>
 
 
-        <div class="stats">
+      <div class="form-group">
 
-          <div>
+        <label for="targetDate">
+          Date à laquelle tu veux l'atteindre
+        </label>
 
-            <div
-              class="stat-number"
-              id="goalCount"
-            >
-              0
-            </div>
+        <input
+          id="targetDate"
+          type="date"
+        >
 
-            <div class="stat-label">
-              Objectifs
-            </div>
-
-          </div>
+      </div>
 
 
-          <div>
+      <div class="form-group">
 
-            <div class="stat-number">
-              0
-            </div>
+        <label for="currentLevel">
+          Où en es-tu actuellement ?
+        </label>
 
-            <div class="stat-label">
-              Jours actifs
-            </div>
+        <textarea
+          id="currentLevel"
+          placeholder="Ex : Je cours actuellement environ 2 km."
+        ></textarea>
 
-          </div>
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="desiredResult">
+          Quel résultat veux-tu obtenir ?
+        </label>
+
+        <textarea
+          id="desiredResult"
+          placeholder="Ex : Être capable de courir 5 km sans m'arrêter."
+        ></textarea>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="weeklyTime">
+          Temps disponible par semaine (minutes)
+        </label>
+
+        <input
+          id="weeklyTime"
+          type="number"
+          min="1"
+          placeholder="Ex : 180"
+        >
+
+      </div>
+
+
+      <button
+        id="submitGoalButton"
+        class="modal-submit"
+        type="submit"
+      >
+        Enregistrer mon objectif
+      </button>
+
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
+
+<script>
+
+  let currentUser = null;
+
+
+  const modal =
+    document.getElementById("goalModal");
+
+  const openModalButton =
+    document.getElementById("openModalButton");
+
+  const emptyAddButton =
+    document.getElementById("emptyAddButton");
+
+  const closeModalButton =
+    document.getElementById("closeModalButton");
+
+  const goalForm =
+    document.getElementById("goalForm");
+
+  const goalsList =
+    document.getElementById("goalsList");
+
+  const emptyState =
+    document.getElementById("emptyState");
+
+  const goalCount =
+    document.getElementById("goalCount");
+
+  const modalMessage =
+    document.getElementById("modalMessage");
+
+  const submitGoalButton =
+    document.getElementById("submitGoalButton");
+
+
+  function openModal() {
+
+    modal.classList.add("show");
+
+  }
+
+
+  function closeModal() {
+
+    modal.classList.remove("show");
+
+    goalForm.reset();
+
+    modalMessage.className =
+      "message";
+
+    modalMessage.textContent = "";
+
+  }
+
+
+  openModalButton.addEventListener(
+    "click",
+    openModal
+  );
+
+
+  emptyAddButton.addEventListener(
+    "click",
+    openModal
+  );
+
+
+  closeModalButton.addEventListener(
+    "click",
+    closeModal
+  );
+
+
+  modal.addEventListener(
+    "click",
+    function(event) {
+
+      if (event.target === modal) {
+
+        closeModal();
+
+      }
+
+    }
+  );
+
+
+  function showModalMessage(
+    text,
+    type
+  ) {
+
+    modalMessage.textContent = text;
+
+    modalMessage.className =
+      "message show " + type;
+
+  }
+
+
+  async function checkUser() {
+
+    try {
+
+      const {
+        data,
+        error
+      } =
+        await window.tasklySupabase.auth
+          .getUser();
+
+
+      if (
+        error ||
+        !data ||
+        !data.user
+      ) {
+
+        window.location.href =
+          "login.html";
+
+        return false;
+
+      }
+
+
+      currentUser =
+        data.user;
+
+
+      const firstName =
+        currentUser.user_metadata?.first_name;
+
+
+      const fallbackName =
+        currentUser.email
+          ? currentUser.email.split("@")[0]
+          : "toi";
+
+
+      const name =
+        firstName ||
+        fallbackName;
+
+
+      document
+        .getElementById("welcomeTitle")
+        .textContent =
+          `Bonjour ${name} 👋`;
+
+
+      return true;
+
+
+    } catch (error) {
+
+      window.location.href =
+        "login.html";
+
+      return false;
+
+    }
+
+  }
+
+
+  async function loadGoals() {
+
+    if (!currentUser) {
+      return;
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await window.tasklySupabase
+        .from("goals")
+        .select("*")
+        .eq("user_id", currentUser.id)
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        );
+
+
+    if (error) {
+
+      console.error(error);
+
+      return;
+
+    }
+
+
+    goalCount.textContent =
+      data.length;
+
+
+    if (data.length === 0) {
+
+      emptyState.style.display =
+        "block";
+
+      goalsList.innerHTML = "";
+
+      return;
+
+    }
+
+
+    emptyState.style.display =
+      "none";
+
+
+    goalsList.innerHTML = "";
+
+
+    data.forEach(function(goal) {
+
+      const element =
+        document.createElement("div");
+
+      element.className =
+        "goal";
+
+
+      let dateText =
+        "Aucune date cible";
+
+
+      if (goal.target_date) {
+
+        const date =
+          new Date(
+            goal.target_date +
+            "T00:00:00"
+          );
+
+
+        dateText =
+          "Objectif pour le " +
+          date.toLocaleDateString(
+            "fr-FR"
+          );
+
+      }
+
+
+      element.innerHTML = `
+
+        <div class="goal-info">
+
+          <span class="goal-category">
+            ${escapeHtml(goal.category)}
+          </span>
+
+          <h3>
+            ${escapeHtml(goal.title)}
+          </h3>
+
+          <p>
+            ${escapeHtml(dateText)}
+          </p>
 
         </div>
-
-      </div>
-
-    </section>
-
-
-    <section>
-
-
-      <div class="section-header">
-
-        <h2>
-          🎯 Mes objectifs
-        </h2>
-
 
         <button
-          class="add-button"
-          disabled
+          class="delete-goal"
+          data-id="${goal.id}"
         >
-          + Nouvel objectif
+          Supprimer
         </button>
 
-      </div>
+      `;
 
 
-      <div class="empty">
+      goalsList.appendChild(element);
 
-        <div class="empty-icon">
-          🎯
-        </div>
+    });
 
 
-        <h3>
-          Aucun objectif pour le moment
-        </h3>
+    document
+      .querySelectorAll(".delete-goal")
+      .forEach(function(button) {
+
+        button.addEventListener(
+          "click",
+          function() {
+
+            deleteGoal(
+              button.dataset.id
+            );
+
+          }
+        );
+
+      });
+
+  }
 
 
-        <p>
-          Crée ton premier objectif et laisse
-          Taskly construire ton plan.
-        </p>
+  function escapeHtml(value) {
+
+    if (value === null || value === undefined) {
+
+      return "";
+
+    }
 
 
-        <button disabled>
-          Créer mon premier objectif
-        </button>
+    return String(value)
 
-      </div>
+      .replaceAll("&", "&amp;")
 
-    </section>
+      .replaceAll("<", "&lt;")
 
-  </main>
+      .replaceAll(">", "&gt;")
+
+      .replaceAll('"', "&quot;")
+
+      .replaceAll("'", "&#039;");
+
+  }
 
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  goalForm.addEventListener(
+    "submit",
+    async function(event) {
 
-  <script src="supabase.js"></script>
+      event.preventDefault();
 
 
-  <script>
+      if (!currentUser) {
 
-    async function checkUser() {
+        showModalMessage(
+          "Ta session a expiré. Reconnecte-toi.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      const title =
+        document
+          .getElementById("goalTitle")
+          .value
+          .trim();
+
+
+      const category =
+        document
+          .getElementById("goalCategory")
+          .value;
+
+
+      const targetDate =
+        document
+          .getElementById("targetDate")
+          .value;
+
+
+      const currentLevel =
+        document
+          .getElementById("currentLevel")
+          .value
+          .trim();
+
+
+      const desiredResult =
+        document
+          .getElementById("desiredResult")
+          .value
+          .trim();
+
+
+      const weeklyTimeValue =
+        document
+          .getElementById("weeklyTime")
+          .value;
+
+
+      const weeklyTime =
+        weeklyTimeValue
+          ? Number(weeklyTimeValue)
+          : null;
+
+
+      submitGoalButton.disabled =
+        true;
+
+      submitGoalButton.textContent =
+        "Enregistrement...";
+
 
       try {
 
         const {
-          data,
           error
         } =
-          await window.tasklySupabase.auth
-            .getUser();
+          await window.tasklySupabase
+            .from("goals")
+            .insert({
+
+              user_id:
+                currentUser.id,
+
+              title:
+                title,
+
+              category:
+                category,
+
+              target_date:
+                targetDate || null,
+
+              current_level:
+                currentLevel || null,
+
+              desired_result:
+                desiredResult || null,
+
+              weekly_time:
+                weeklyTime
+
+            });
 
 
-        if (
-          error ||
-          !data ||
-          !data.user
-        ) {
+        if (error) {
 
-          window.location.href =
-            "login.html";
+          console.error(error);
+
+          showModalMessage(
+            "Impossible d'enregistrer l'objectif : " +
+            error.message,
+            "error"
+          );
+
+          submitGoalButton.disabled =
+            false;
+
+          submitGoalButton.textContent =
+            "Enregistrer mon objectif";
 
           return;
 
         }
 
 
-        const user =
-          data.user;
+        closeModal();
 
-
-        const firstName =
-          user.user_metadata?.first_name;
-
-
-        const fallbackName =
-          user.email
-            ? user.email.split("@")[0]
-            : "toi";
-
-
-        const name =
-          firstName ||
-          fallbackName;
-
-
-        document
-          .getElementById("welcomeTitle")
-          .textContent =
-            `Bonjour ${name} 👋`;
+        await loadGoals();
 
 
       } catch (error) {
 
-        window.location.href =
-          "login.html";
+        console.error(error);
+
+        showModalMessage(
+          "Une erreur est survenue : " +
+          error.message,
+          "error"
+        );
 
       }
+
+
+      submitGoalButton.disabled =
+        false;
+
+      submitGoalButton.textContent =
+        "Enregistrer mon objectif";
+
+    }
+  );
+
+
+  async function deleteGoal(id) {
+
+    const confirmed =
+      confirm(
+        "Supprimer cet objectif ?"
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    const {
+      error
+    } =
+      await window.tasklySupabase
+        .from("goals")
+        .delete()
+        .eq("id", id)
+        .eq(
+          "user_id",
+          currentUser.id
+        );
+
+
+    if (error) {
+
+      alert(
+        "Impossible de supprimer l'objectif : " +
+        error.message
+      );
+
+      return;
 
     }
 
 
-    document
-      .getElementById("logoutButton")
-      .addEventListener(
-        "click",
-        async function() {
+    await loadGoals();
 
-          await window.tasklySupabase.auth
-            .signOut();
-
-          window.location.href =
-            "index.html";
-
-        }
-      );
+  }
 
 
-    checkUser();
+  document
+    .getElementById("logoutButton")
+    .addEventListener(
+      "click",
+      async function() {
 
-  </script>
+        await window.tasklySupabase.auth
+          .signOut();
+
+        window.location.href =
+          "index.html";
+
+      }
+    );
+
+
+  async function start() {
+
+    const loggedIn =
+      await checkUser();
+
+
+    if (!loggedIn) {
+      return;
+    }
+
+
+    await loadGoals();
+
+  }
+
+
+  start();
+
+</script>
+
 
 </body>
 
