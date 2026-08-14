@@ -34,7 +34,6 @@
       font-size: 28px;
       font-weight: 800;
       margin-bottom: 30px;
-      letter-spacing: -1px;
     }
 
     .logo span {
@@ -93,8 +92,8 @@
       cursor: pointer;
     }
 
-    button:hover {
-      background: #554cff;
+    button:disabled {
+      opacity: 0.6;
     }
 
     .login {
@@ -119,8 +118,6 @@
       font-size: 14px;
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase.js"></script>
 </head>
 
 <body>
@@ -140,7 +137,7 @@
         tes objectifs en actions.
       </p>
 
-      <form>
+      <form id="signupForm">
 
         <label for="name">Prénom</label>
 
@@ -189,107 +186,100 @@
 
   </div>
 
-<script>
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
 
-</script>
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
+  <!-- Inscription Taskly -->
+  <script>
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
+    const form = document.getElementById("signupForm");
 
-    if (password.length < 8) {
-      alert("Le mot de passe doit contenir au moins 8 caractères.");
-      return;
-    }
+    form.addEventListener("submit", async function(event) {
 
-    const button = form.querySelector("button");
+      event.preventDefault();
 
-    button.disabled = true;
-    button.textContent = "Création du compte...";
+      const name =
+        document.getElementById("name").value.trim();
 
-    const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-      options: {
-        data: {
-          first_name: name
-        }
-      }
-    });
+      const email =
+        document.getElementById("email").value.trim();
 
-    if (error) {
-      alert(error.message);
+      const password =
+        document.getElementById("password").value;
 
-      button.disabled = false;
-      button.textContent = "Créer mon compte gratuitement";
+      if (password.length < 8) {
 
-      return;
-    }
-
-    alert(
-      "Compte créé ! Vérifie ton adresse e-mail pour confirmer ton compte."
-    );
-
-    window.location.href = "login.html";
-  });
-</script>
-<script>
-  const form = document.querySelector("form");
-
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
-
-    if (password.length < 8) {
-      alert("Le mot de passe doit contenir au moins 8 caractères.");
-      return;
-    }
-
-    const button = form.querySelector("button");
-
-    button.disabled = true;
-    button.textContent = "Création du compte...";
-
-    try {
-      const { data, error } =
-        await window.tasklySupabase.auth.signUp({
-          email: email,
-          password: password,
-          options: {
-            data: {
-              first_name: name
-            }
-          }
-        });
-
-      if (error) {
-        alert("Erreur : " + error.message);
-
-        button.disabled = false;
-        button.textContent = "Créer mon compte gratuitement";
+        alert(
+          "Le mot de passe doit contenir au moins 8 caractères."
+        );
 
         return;
       }
 
-      alert(
-        "Compte créé ! Vérifie ton adresse e-mail."
-      );
+      const button =
+        form.querySelector("button");
 
-      window.location.href = "login.html";
+      button.disabled = true;
 
-    } catch (error) {
+      button.textContent =
+        "Création du compte...";
 
-      alert("Erreur inattendue : " + error.message);
+      try {
 
-      button.disabled = false;
-      button.textContent = "Créer mon compte gratuitement";
-    }
-  });
-</script>
+        const result =
+          await window.tasklySupabase.auth.signUp({
+
+            email: email,
+
+            password: password,
+
+            options: {
+              data: {
+                first_name: name
+              }
+            }
+
+          });
+
+        if (result.error) {
+
+          alert(
+            "Erreur : " +
+            result.error.message
+          );
+
+          button.disabled = false;
+
+          button.textContent =
+            "Créer mon compte gratuitement";
+
+          return;
+        }
+
+        alert(
+          "Compte créé ! Vérifie ton adresse e-mail."
+        );
+
+        window.location.href =
+          "login.html";
+
+      } catch (error) {
+
+        alert(
+          "Erreur inattendue : " +
+          error.message
+        );
+
+        button.disabled = false;
+
+        button.textContent =
+          "Créer mon compte gratuitement";
+      }
+
+    });
+
+  </script>
+
 </body>
 </html>
