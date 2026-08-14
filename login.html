@@ -46,7 +46,7 @@
       border: 1px solid #e5e6eb;
       border-radius: 22px;
       padding: 30px;
-      box-shadow: 0 20px 60px rgba(25,25,40,0.08);
+      box-shadow: 0 20px 60px rgba(25, 25, 40, 0.08);
     }
 
     h1 {
@@ -98,6 +98,16 @@
       cursor: not-allowed;
     }
 
+    .forgot {
+      display: block;
+      text-align: right;
+      margin-top: -8px;
+      margin-bottom: 20px;
+      color: #635bff;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
     .signup {
       text-align: center;
       margin-top: 20px;
@@ -120,14 +130,25 @@
       font-size: 14px;
     }
 
-    .forgot {
+    .message {
+      display: none;
+      margin-bottom: 18px;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .message.error {
       display: block;
-      text-align: right;
-      margin-top: -8px;
-      margin-bottom: 20px;
-      color: #635bff;
-      text-decoration: none;
-      font-size: 13px;
+      background: #fff0f0;
+      color: #b42318;
+    }
+
+    .message.success {
+      display: block;
+      background: #eefbf3;
+      color: #16794c;
     }
   </style>
 </head>
@@ -149,31 +170,39 @@
         tes objectifs et ta progression.
       </p>
 
+      <div id="message" class="message"></div>
+
       <form id="loginForm">
 
-        <label for="email">Adresse e-mail</label>
+        <label for="email">
+          Adresse e-mail
+        </label>
 
         <input
           id="email"
           type="email"
           placeholder="ton@email.com"
+          autocomplete="email"
           required
         >
 
-        <label for="password">Mot de passe</label>
+        <label for="password">
+          Mot de passe
+        </label>
 
         <input
           id="password"
           type="password"
           placeholder="Ton mot de passe"
+          autocomplete="current-password"
           required
         >
 
-        <a href="#" class="forgot">
+        <a href="#" id="forgotPassword" class="forgot">
           Mot de passe oublié ?
         </a>
 
-        <button type="submit">
+        <button id="loginButton" type="submit">
           Se connecter
         </button>
 
@@ -181,7 +210,9 @@
 
       <div class="signup">
         Pas encore de compte ?
-        <a href="signup.html">Créer un compte</a>
+        <a href="signup.html">
+          Créer un compte
+        </a>
       </div>
 
       <a href="index.html" class="back">
@@ -192,42 +223,209 @@
 
   </div>
 
+
+  <!-- Bibliothèque Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Configuration Taskly -->
   <script src="supabase.js"></script>
 
-  <script>
-    const form = document.getElementById("loginForm");
 
-    form.addEventListener("submit", async (event) => {
+  <!-- Fonctionnement de la connexion -->
+  <script>
+
+    const form = document.getElementById("loginForm");
+    const button = document.getElementById("loginButton");
+    const message = document.getElementById("message");
+    const forgotPassword =
+      document.getElementById("forgotPassword");
+
+
+    function showMessage(text, type) {
+
+      message.textContent = text;
+
+      message.className =
+        "message " + type;
+
+    }
+
+
+    form.addEventListener("submit", async function(event) {
 
       event.preventDefault();
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
+      message.className = "message";
+      message.textContent = "";
 
-      const button = form.querySelector("button");
+      const email =
+        document.getElementById("email")
+          .value
+          .trim();
 
-      button.disabled = true;
-      button.textContent = "Connexion...";
+      const password =
+        document.getElementById("password")
+          .value;
 
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password
-      });
 
-      if (error) {
+      if (!window.tasklySupabase) {
 
-        alert(error.message);
-
-        button.disabled = false;
-        button.textContent = "Se connecter";
+        showMessage(
+          "Erreur : la connexion à Supabase n'est pas disponible.",
+          "error"
+        );
 
         return;
       }
 
-      window.location.href = "dashboard.html";
+
+      button.disabled = true;
+      button.textContent = "Connexion...";
+
+
+      try {
+
+        const result =
+          await window.tasklySupabase.auth.signInWithPassword({
+            email: email,
+            password: password
+          });
+
+
+        if (result.error) {
+
+          showMessage(
+            "Connexion impossible : " +
+            result.error.message,
+            "error"
+          );
+
+          button.disabled = false;
+          button.textContent = "Se connecter";
+
+          return;
+        }
+
+
+        if (!result.data || !result.data.user) {
+
+          showMessage(
+            "La connexion n'a pas pu être confirmée.",
+            "error"
+          );
+
+          button.disabled = false;
+          button.textContent = "Se connecter";
+
+          return;
+        }
+
+
+        showMessage(
+          "Connexion réussie ! Redirection...",
+          "success"
+        );
+
+
+        setTimeout(function() {
+
+          window.location.href = "dashboard.html";
+
+        }, 500);
+
+
+      } catch (error) {
+
+        showMessage(
+          "Une erreur est survenue : " +
+          error.message,
+          "error"
+        );
+
+        button.disabled = false;
+        button.textContent = "Se connecter";
+
+      }
 
     });
+
+
+    forgotPassword.addEventListener(
+      "click",
+      async function(event) {
+
+        event.preventDefault();
+
+        const email =
+          document.getElementById("email")
+            .value
+            .trim();
+
+
+        if (!email) {
+
+          showMessage(
+            "Entre d'abord ton adresse e-mail.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        if (!window.tasklySupabase) {
+
+          showMessage(
+            "Supabase n'est pas disponible.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        try {
+
+          const result =
+            await window.tasklySupabase.auth
+              .resetPasswordForEmail(email, {
+                redirectTo:
+                  window.location.origin +
+                  "/login.html"
+              });
+
+
+          if (result.error) {
+
+            showMessage(
+              "Erreur : " +
+              result.error.message,
+              "error"
+            );
+
+            return;
+          }
+
+
+          showMessage(
+            "Un e-mail de réinitialisation a été envoyé.",
+            "success"
+          );
+
+
+        } catch (error) {
+
+          showMessage(
+            "Erreur : " +
+            error.message,
+            "error"
+          );
+
+        }
+
+      }
+    );
+
   </script>
 
 </body>
