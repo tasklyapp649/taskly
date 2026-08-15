@@ -3,323 +3,578 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Taskly — Transforme tes objectifs en actions</title>
+  <meta
+    name="description"
+    content="Taskly t'aide à transformer tes objectifs en actions concrètes et à suivre ta progression."
+  >
 
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       background: #f7f8fc;
-      color: #15171c;
+      color: #17171c;
+      line-height: 1.5;
     }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
 
     header {
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 7%;
-      background: rgba(255,255,255,0.9);
-      border-bottom: 1px solid #e8e9ee;
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 100;
+      background: rgba(247, 248, 252, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e9eaf0;
     }
 
-    .logo {
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
-
-    .logo span {
-      color: #635bff;
-    }
-
-    nav {
+    .navbar {
+      height: 76px;
       display: flex;
-      gap: 25px;
       align-items: center;
+      justify-content: space-between;
+      gap: 20px;
     }
 
-    nav a {
-      text-decoration: none;
-      color: #555963;
-      font-size: 14px;
+    /* Logo entièrement cliquable */
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      cursor: pointer;
     }
 
-    .nav-button {
-      background: #15171c;
-      color: white;
-      padding: 11px 18px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .hero {
-      max-width: 1100px;
-      margin: auto;
-      padding: 95px 25px 70px;
-      text-align: center;
-    }
-
-    .badge {
-      display: inline-block;
-      background: #eeecff;
-      color: #554cff;
-      padding: 8px 14px;
-      border-radius: 50px;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 25px;
-    }
-
-    h1 {
-      font-size: clamp(45px, 7vw, 78px);
-      line-height: 0.98;
-      letter-spacing: -4px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    h1 span {
-      color: #635bff;
-    }
-
-    .hero p {
-      max-width: 620px;
-      margin: 28px auto;
-      color: #666a74;
-      font-size: 18px;
-      line-height: 1.6;
-    }
-
-    .main-button {
-      display: inline-block;
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
       background: #635bff;
       color: white;
-      text-decoration: none;
-      padding: 16px 27px;
-      border-radius: 13px;
-      font-weight: 700;
-      box-shadow: 0 10px 25px rgba(99,91,255,0.25);
-    }
-
-    .subtext {
-      margin-top: 15px;
-      font-size: 13px;
-      color: #92959d;
-    }
-
-    .demo {
-      max-width: 900px;
-      margin: 30px auto 100px;
-      padding: 0 20px;
-    }
-
-    .app-card {
-      background: white;
-      border: 1px solid #e5e6eb;
-      border-radius: 24px;
-      padding: 30px;
-      box-shadow: 0 25px 70px rgba(25,25,40,0.08);
-      text-align: left;
-    }
-
-    .app-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 25px;
-    }
-
-    .app-title {
-      font-size: 20px;
-      font-weight: 800;
-    }
-
-    .avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #eeecff;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 19px;
+      font-weight: 800;
+      box-shadow: 0 7px 18px rgba(99, 91, 255, 0.22);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 19px;
+      border-radius: 11px;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: white;
+      border-color: #e3e4eb;
+      color: #24242a;
+    }
+
+    .btn-secondary:hover {
+      border-color: #d4d5df;
+      background: #fafaff;
+    }
+
+    .btn-primary {
+      background: #635bff;
+      color: white;
+      box-shadow: 0 8px 20px rgba(99, 91, 255, 0.18);
+    }
+
+    .btn-primary:hover {
+      background: #554df0;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      padding: 85px 0 70px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #eeedff;
+      color: #554df0;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #635bff;
+    }
+
+    h1 {
+      font-size: clamp(42px, 6vw, 67px);
+      line-height: 1.02;
+      letter-spacing: -3px;
+      max-width: 650px;
+      margin-bottom: 22px;
+    }
+
+    .hero-highlight {
       color: #635bff;
+    }
+
+    .hero-text {
+      max-width: 570px;
+      color: #686976;
+      font-size: 18px;
+      line-height: 1.65;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-buttons .btn {
+      min-height: 50px;
+      padding: 0 22px;
+    }
+
+    /* =========================
+       DASHBOARD PREVIEW
+    ========================= */
+
+    .preview-wrapper {
+      position: relative;
+    }
+
+    .preview-glow {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      background: #635bff;
+      opacity: 0.09;
+      filter: blur(70px);
+      border-radius: 50%;
+      top: 30px;
+      right: 20px;
+      z-index: 0;
+    }
+
+    .dashboard-preview {
+      position: relative;
+      z-index: 1;
+      background: white;
+      border: 1px solid #e5e6ed;
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 25px 70px rgba(32, 32, 50, 0.09);
+      transform: rotate(1deg);
+    }
+
+    .preview-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .preview-title {
+      font-size: 16px;
       font-weight: 800;
     }
 
-    .goal {
-      border: 1px solid #e9e9ee;
-      border-radius: 16px;
-      padding: 20px;
-      margin-top: 15px;
-    }
-
-    .goal-title {
+    .preview-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #eeedff;
+      color: #635bff;
       display: flex;
-      justify-content: space-between;
-      margin-bottom: 13px;
-      font-weight: 700;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 12px;
     }
 
-    .progress {
-      width: 100%;
-      height: 9px;
-      background: #eeeeF3;
-      border-radius: 20px;
-      overflow: hidden;
+    .preview-welcome {
+      background: #f7f8fc;
+      border-radius: 15px;
+      padding: 17px;
+      margin-bottom: 14px;
     }
 
-    .progress-bar {
-      height: 100%;
-      width: 68%;
-      background: #635bff;
-      border-radius: 20px;
+    .preview-welcome small {
+      color: #7b7c87;
+      font-size: 11px;
     }
+
+    .preview-welcome strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 19px;
+    }
+
+    .preview-coach {
+      border: 1px solid #e8e7ff;
+      background: #fafaff;
+      border-radius: 15px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .coach-label {
+      color: #635bff;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .preview-coach p {
+      font-size: 13px;
+      color: #575863;
+    }
+
+    .preview-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .preview-stat {
+      border: 1px solid #ececf1;
+      border-radius: 14px;
+      padding: 15px;
+    }
+
+    .preview-stat strong {
+      display: block;
+      font-size: 23px;
+    }
+
+    .preview-stat span {
+      font-size: 11px;
+      color: #777883;
+    }
+
+    /* =========================
+       FEATURES
+    ========================= */
 
     .section {
-      max-width: 1100px;
-      margin: auto;
-      padding: 70px 25px;
+      padding: 85px 0;
     }
 
-    .section-title {
+    .section-header {
       text-align: center;
-      font-size: 40px;
-      letter-spacing: -2px;
-      margin-bottom: 15px;
-    }
-
-    .section-description {
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto 45px;
-      text-align: center;
-      color: #70737c;
-      line-height: 1.6;
+    }
+
+    .section-header h2 {
+      font-size: clamp(30px, 4vw, 43px);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 14px;
+    }
+
+    .section-header p {
+      color: #70717d;
+      font-size: 16px;
     }
 
     .features {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 18px;
     }
 
-    .feature {
+    .feature-card {
       background: white;
-      border: 1px solid #e7e8ed;
-      padding: 28px;
-      border-radius: 20px;
+      border: 1px solid #e7e8ee;
+      border-radius: 18px;
+      padding: 27px;
+      transition: 0.2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(30, 30, 50, 0.06);
     }
 
     .feature-icon {
-      font-size: 30px;
+      width: 45px;
+      height: 45px;
+      border-radius: 13px;
+      background: #eeedff;
+      color: #635bff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
       margin-bottom: 18px;
     }
 
-    .feature h3 {
-      margin-bottom: 10px;
+    .feature-card h3 {
+      font-size: 18px;
+      margin-bottom: 9px;
     }
 
-    .feature p {
-      color: #71747d;
-      line-height: 1.5;
+    .feature-card p {
+      color: #71727d;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    /* =========================
+       HOW IT WORKS
+    ========================= */
+
+    .steps-section {
+      background: white;
+      border-top: 1px solid #ececf1;
+      border-bottom: 1px solid #ececf1;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .step-number {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #635bff;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      font-weight: 800;
+    }
+
+    .step h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .step p {
+      color: #71727d;
       font-size: 14px;
     }
 
-    .pricing {
-      max-width: 900px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    /* =========================
+       CTA
+    ========================= */
+
+    .cta {
+      padding: 85px 0;
+    }
+
+    .cta-box {
+      background: #635bff;
+      color: white;
+      border-radius: 25px;
+      padding: 55px 30px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(99, 91, 255, 0.2);
+    }
+
+    .cta-box h2 {
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 15px;
+    }
+
+    .cta-box p {
+      max-width: 600px;
+      margin: 0 auto 25px;
+      opacity: 0.9;
+    }
+
+    .cta-box .btn {
+      background: white;
+      color: #635bff;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      border-top: 1px solid #e5e6eb;
+      background: white;
+    }
+
+    .footer-content {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 20px;
     }
 
-    .price-card {
-      background: white;
-      border: 1px solid #e3e4e9;
-      border-radius: 22px;
-      padding: 32px;
-    }
-
-    .price-card.pro {
-      border: 2px solid #635bff;
-    }
-
-    .price {
-      font-size: 42px;
+    .footer-logo {
       font-weight: 800;
-      margin: 15px 0;
+      font-size: 17px;
     }
 
-    .price span {
-      font-size: 14px;
-      color: #777;
-      font-weight: 400;
-    }
-
-    .price-card ul {
-      list-style: none;
-      margin: 25px 0;
-    }
-
-    .price-card li {
-      margin: 12px 0;
-      color: #555963;
-    }
-
-    .price-button {
-      display: block;
-      text-align: center;
-      padding: 13px;
-      border-radius: 11px;
-      background: #15171c;
-      color: white;
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .pro .price-button {
-      background: #635bff;
-    }
-
-    footer {
-      margin-top: 70px;
-      padding: 40px 20px;
-      text-align: center;
-      border-top: 1px solid #e5e6eb;
-      color: #858891;
+    .footer-copy {
+      color: #858691;
       font-size: 13px;
     }
 
-    @media (max-width: 700px) {
-      nav a:not(.nav-button) {
-        display: none;
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 850px) {
+      .hero {
+        padding: 55px 0;
       }
 
-      .features,
-      .pricing {
+      .hero-grid {
         grid-template-columns: 1fr;
+        gap: 45px;
       }
 
       h1 {
         letter-spacing: -2px;
       }
 
-      .hero {
-        padding-top: 65px;
+      .features,
+      .steps {
+        grid-template-columns: 1fr;
       }
 
-      .app-card {
-        padding: 20px;
+      .dashboard-preview {
+        transform: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .navbar {
+        height: 68px;
+      }
+
+      .logo {
+        font-size: 19px;
+      }
+
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 9px;
+      }
+
+      .nav-actions {
+        gap: 6px;
+      }
+
+      .nav-actions .btn {
+        min-height: 40px;
+        padding: 0 12px;
+        font-size: 12px;
+      }
+
+      .hero-text {
+        font-size: 16px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .hero-buttons .btn {
+        width: 100%;
+      }
+
+      .section,
+      .cta {
+        padding: 65px 0;
+      }
+
+      .cta-box {
+        padding: 40px 22px;
+        border-radius: 20px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        justify-content: center;
+        padding: 22px 0;
+        text-align: center;
       }
     }
   </style>
@@ -327,211 +582,249 @@
 
 <body>
 
-  <header>
-    <div class="logo">task<span>ly</span></div>
+  <!-- =========================
+       HEADER
+  ========================= -->
 
-    <nav>
-      <a href="#fonctionnement">Comment ça marche</a>
-      <a href="#prix">Tarifs</a>
-      <a href="login.html" class="nav-button">Se connecter</a>
-    </nav>
+  <header>
+    <div class="container navbar">
+
+      <!-- Logo : retour vers index.html -->
+      <a href="index.html" class="logo" aria-label="Retour à l'accueil Taskly">
+        <span class="logo-icon">✓</span>
+        <span>Taskly</span>
+      </a>
+
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-secondary">
+          Se connecter
+        </a>
+
+        <a href="signup.html" class="btn btn-primary">
+          Commencer
+        </a>
+      </div>
+
+    </div>
   </header>
+
+  <!-- =========================
+       HERO
+  ========================= -->
 
   <main>
 
     <section class="hero">
+      <div class="container hero-grid">
 
-      <div class="badge">✨ Ton coach personnel propulsé par l'IA</div>
+        <div>
+          <div class="badge">
+            <span class="badge-dot"></span>
+            Ton objectif. Ton plan. Ta progression.
+          </div>
 
-      <h1>
-        Transforme tes objectifs
-        en <span>actions.</span>
-      </h1>
+          <h1>
+            Transforme tes objectifs
+            <span class="hero-highlight">en actions.</span>
+          </h1>
 
-      <p>
-        Taskly transforme ce que tu veux accomplir en un
-        programme simple, personnalisé et réalisable chaque jour.
-      </p>
+          <p class="hero-text">
+            Taskly t'aide à transformer ce que tu veux accomplir
+            en actions concrètes, simples et réalisables,
+            puis à suivre ta progression jour après jour.
+          </p>
 
-      <a href="signup.html" class="main-button">
-        Commencer gratuitement →
-      </a>
+          <div class="hero-buttons">
+            <a href="signup.html" class="btn btn-primary">
+              Commencer gratuitement →
+            </a>
 
-      <div class="subtext">
-        Aucune carte bancaire nécessaire.
-      </div>
-
-    </section>
-
-    <section class="demo">
-
-      <div class="app-card">
-
-        <div class="app-top">
-          <div class="app-title">Bonjour 👋</div>
-          <div class="avatar">S</div>
+            <a href="login.html" class="btn btn-secondary">
+              Se connecter
+            </a>
+          </div>
         </div>
 
-        <p style="color:#777; margin-bottom:20px;">
-          Voici tes objectifs actuels.
-        </p>
+        <!-- Aperçu du dashboard -->
+        <div class="preview-wrapper">
 
-        <div class="goal">
+          <div class="preview-glow"></div>
 
-          <div class="goal-title">
-            <span>🏃 Courir 5 km en 25 min</span>
-            <span style="color:#635bff;">68%</span>
-          </div>
+          <div class="dashboard-preview">
 
-          <div class="progress">
-            <div class="progress-bar"></div>
-          </div>
-
-        </div>
-
-        <div class="goal">
-
-          <div class="goal-title">
-            <span>📚 Apprendre l'anglais</span>
-            <span style="color:#635bff;">42%</span>
-          </div>
-
-          <div class="progress">
-            <div
-              class="progress-bar"
-              style="width:42%;">
+            <div class="preview-top">
+              <div class="preview-title">Mon espace</div>
+              <div class="preview-avatar">S</div>
             </div>
-          </div>
 
+            <div class="preview-welcome">
+              <small>Ton espace personnel</small>
+              <strong>Bonjour 👋</strong>
+            </div>
+
+            <div class="preview-coach">
+              <div class="coach-label">TON COACH IA</div>
+              <p>
+                Chaque objectif commence par une petite action.
+                Commençons ensemble.
+              </p>
+            </div>
+
+            <div class="preview-stats">
+
+              <div class="preview-stat">
+                <strong>3</strong>
+                <span>Objectifs</span>
+              </div>
+
+              <div class="preview-stat">
+                <strong>67%</strong>
+                <span>Progression</span>
+              </div>
+
+            </div>
+
+          </div>
         </div>
 
       </div>
-
     </section>
 
-    <section class="section" id="fonctionnement">
+    <!-- =========================
+         FEATURES
+    ========================= -->
 
-      <h2 class="section-title">
-        Un objectif.
-        Un plan.
-        Une progression.
-      </h2>
+    <section class="section">
+      <div class="container">
 
-      <p class="section-description">
-        Tu expliques simplement ce que tu veux accomplir.
-        Taskly s'occupe de transformer ton objectif en petites
-        actions quotidiennes.
-      </p>
-
-      <div class="features">
-
-        <div class="feature">
-
-          <div class="feature-icon">🎯</div>
-
-          <h3>Définis ton objectif</h3>
-
+        <div class="section-header">
+          <h2>Tout ce qu'il faut pour avancer.</h2>
           <p>
-            Explique simplement ce que tu veux atteindre,
-            même si tu ne sais pas encore comment y arriver.
+            Taskly rassemble tes objectifs, tes actions et ta progression
+            dans un espace simple et personnel.
           </p>
-
         </div>
 
-        <div class="feature">
+        <div class="features">
 
-          <div class="feature-icon">🤖</div>
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Objectifs clairs</h3>
+            <p>
+              Définis précisément ce que tu veux accomplir,
+              avec une date cible et un résultat souhaité.
+            </p>
+          </div>
 
-          <h3>L'IA crée ton plan</h3>
+          <div class="feature-card">
+            <div class="feature-icon">✓</div>
+            <h3>Actions concrètes</h3>
+            <p>
+              Transforme progressivement tes grands objectifs
+              en petites actions faciles à réaliser.
+            </p>
+          </div>
 
-          <p>
-            Taskly analyse ton objectif et construit
-            un programme adapté à ton temps et ton niveau.
-          </p>
-
-        </div>
-
-        <div class="feature">
-
-          <div class="feature-icon">📈</div>
-
-          <h3>Progresse chaque jour</h3>
-
-          <p>
-            Coche tes tâches, suis ta progression et adapte
-            ton programme lorsque quelque chose ne se passe pas comme prévu.
-          </p>
+          <div class="feature-card">
+            <div class="feature-icon">📈</div>
+            <h3>Progression</h3>
+            <p>
+              Visualise tes efforts, tes tâches terminées
+              et les progrès réalisés vers tes objectifs.
+            </p>
+          </div>
 
         </div>
 
       </div>
-
     </section>
 
-    <section class="section" id="prix">
+    <!-- =========================
+         HOW IT WORKS
+    ========================= -->
 
-      <h2 class="section-title">
-        Simple et accessible.
-      </h2>
+    <section class="section steps-section">
+      <div class="container">
 
-      <p class="section-description">
-        Commence gratuitement. Passe à Pro uniquement
-        lorsque tu as besoin de plus.
-      </p>
-
-      <div class="pricing">
-
-        <div class="price-card">
-
-          <h3>Free</h3>
-
-          <div class="price">
-            0€ <span>/ mois</span>
-          </div>
-
-          <ul>
-            <li>✓ 1 objectif</li>
-            <li>✓ Plan personnalisé</li>
-            <li>✓ Suivi de progression</li>
-            <li>✓ 3 générations IA / semaine</li>
-          </ul>
-
-          <a href="#" class="price-button">
-            Commencer
-          </a>
-
+        <div class="section-header">
+          <h2>Simple. De l'idée à l'action.</h2>
+          <p>
+            Pas besoin de compliquer tes objectifs.
+          </p>
         </div>
 
-        <div class="price-card pro">
+        <div class="steps">
 
-          <h3>Taskly Pro</h3>
-
-          <div class="price">
-            4,99€ <span>/ mois</span>
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Définis ton objectif</h3>
+            <p>
+              Explique à Taskly ce que tu veux accomplir.
+            </p>
           </div>
 
-          <ul>
-            <li>✓ Objectifs illimités</li>
-            <li>✓ Coach IA</li>
-            <li>✓ Adaptation automatique</li>
-            <li>✓ Statistiques avancées</li>
-            <li>✓ Historique complet</li>
-          </ul>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Construis ton plan</h3>
+            <p>
+              Transforme ton objectif en actions concrètes.
+            </p>
+          </div>
 
-          <a href="#" class="price-button">
-            Passer à Pro
-          </a>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Suis ta progression</h3>
+            <p>
+              Avance étape par étape et visualise tes résultats.
+            </p>
+          </div>
 
         </div>
 
       </div>
+    </section>
 
+    <!-- =========================
+         CTA
+    ========================= -->
+
+    <section class="cta">
+      <div class="container">
+
+        <div class="cta-box">
+          <h2>Prêt à commencer ?</h2>
+
+          <p>
+            Crée ton compte gratuitement et commence à transformer
+            tes objectifs en actions.
+          </p>
+
+          <a href="signup.html" class="btn">
+            Commencer gratuitement →
+          </a>
+        </div>
+
+      </div>
     </section>
 
   </main>
 
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
   <footer>
-    © 2026 Taskly — Transforme tes objectifs en actions.
+    <div class="container footer-content">
+
+      <div class="footer-logo">
+        Taskly
+      </div>
+
+      <div class="footer-copy">
+        © 2026 Taskly. Tous droits réservés.
+      </div>
+
+    </div>
   </footer>
 
 </body>
