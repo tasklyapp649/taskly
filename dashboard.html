@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>Dashboard — Taskly</title>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -13,7 +20,12 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       background: #f7f8fc;
       color: #15171c;
       min-height: 100vh;
@@ -23,9 +35,11 @@
       height: 72px;
       background: white;
       border-bottom: 1px solid #e7e8ed;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       padding: 0 6%;
     }
 
@@ -92,7 +106,7 @@
     }
 
     .coach p {
-      opacity: .9;
+      opacity: 0.9;
       line-height: 1.5;
       margin-bottom: 20px;
     }
@@ -124,6 +138,10 @@
       font-size: 13px;
     }
 
+    .section {
+      margin-bottom: 35px;
+    }
+
     .section-header {
       display: flex;
       justify-content: space-between;
@@ -135,8 +153,7 @@
       font-size: 24px;
     }
 
-    .add-button,
-    .primary-button {
+    .add-button {
       border: none;
       background: #635bff;
       color: white;
@@ -144,155 +161,6 @@
       border-radius: 10px;
       font-weight: 700;
       cursor: pointer;
-    }
-
-    .goals {
-      display: grid;
-      gap: 18px;
-    }
-
-    .goal {
-      background: white;
-      border: 1px solid #e5e6eb;
-      border-radius: 20px;
-      padding: 22px;
-    }
-
-    .goal-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      align-items: flex-start;
-    }
-
-    .goal-info {
-      min-width: 0;
-      flex: 1;
-    }
-
-    .goal-info h3 {
-      margin-bottom: 7px;
-      font-size: 20px;
-    }
-
-    .goal-info p {
-      color: #777a83;
-      font-size: 14px;
-    }
-
-    .goal-category {
-      display: inline-block;
-      margin-bottom: 8px;
-      padding: 5px 9px;
-      border-radius: 8px;
-      background: #f0efff;
-      color: #635bff;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .goal-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .edit-goal,
-    .delete-goal,
-    .plan-button {
-      border: none;
-      padding: 9px 12px;
-      border-radius: 9px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    .edit-goal {
-      background: #f0efff;
-      color: #635bff;
-    }
-
-    .delete-goal {
-      background: #fff0f0;
-      color: #b42318;
-    }
-
-    .plan-button {
-      background: #635bff;
-      color: white;
-    }
-
-    .progress-area {
-      margin-top: 20px;
-    }
-
-    .progress-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .progress-bar {
-      height: 9px;
-      background: #ececf2;
-      border-radius: 99px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: #635bff;
-      border-radius: 99px;
-      transition: width .3s ease;
-    }
-
-    .tasks {
-      margin-top: 20px;
-      display: grid;
-      gap: 9px;
-    }
-
-    .task {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #f8f8fb;
-      border-radius: 11px;
-      padding: 11px 12px;
-    }
-
-    .task input {
-      width: 18px;
-      height: 18px;
-      accent-color: #635bff;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    .task-title {
-      flex: 1;
-      font-size: 14px;
-    }
-
-    .task.completed .task-title {
-      text-decoration: line-through;
-      color: #92949c;
-    }
-
-    .task-date {
-      color: #858791;
-      font-size: 12px;
-    }
-
-    .task-delete {
-      border: none;
-      background: transparent;
-      color: #b42318;
-      cursor: pointer;
-      font-size: 16px;
     }
 
     .empty {
@@ -317,15 +185,225 @@
       margin-bottom: 20px;
     }
 
+    .empty button {
+      border: none;
+      background: #635bff;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .goals {
+      display: grid;
+      gap: 15px;
+    }
+
+    .goal {
+      background: white;
+      border: 1px solid #e5e6eb;
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .goal-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .goal-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .goal-info h3 {
+      margin-bottom: 7px;
+    }
+
+    .goal-info p {
+      color: #777a83;
+      font-size: 14px;
+    }
+
+    .goal-category {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 5px 9px;
+      border-radius: 8px;
+      background: #f0efff;
+      color: #635bff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .goal-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .edit-goal,
+    .delete-goal {
+      border: none;
+      padding: 9px 12px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .edit-goal {
+      background: #f0efff;
+      color: #635bff;
+    }
+
+    .delete-goal {
+      background: #fff0f0;
+      color: #b42318;
+    }
+
+    .progress-area {
+      margin-top: 18px;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 9px;
+      background: #ececf1;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #635bff;
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    .tasks {
+      margin-top: 20px;
+      display: grid;
+      gap: 9px;
+    }
+
+    .task {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 13px;
+      border: 1px solid #ececf1;
+      border-radius: 12px;
+      background: #fafaff;
+    }
+
+    .task-checkbox {
+      width: 19px;
+      height: 19px;
+      accent-color: #635bff;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .task-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .task-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .task.completed .task-title {
+      text-decoration: line-through;
+      color: #92949c;
+    }
+
+    .task-date {
+      color: #8a8c94;
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .task-delete {
+      border: none;
+      background: transparent;
+      color: #a1a2aa;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .generate-area {
+      margin-top: 18px;
+    }
+
+    .generate-button {
+      width: 100%;
+      border: none;
+      background: #15171c;
+      color: white;
+      padding: 13px 16px;
+      border-radius: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .generate-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .ai-status {
+      display: none;
+      margin-top: 10px;
+      padding: 11px 13px;
+      border-radius: 10px;
+      background: #f0efff;
+      color: #635bff;
+      font-size: 13px;
+    }
+
+    .ai-status.show {
+      display: block;
+    }
+
+    .ai-status.error {
+      background: #fff0f0;
+      color: #b42318;
+    }
+
+    .ai-status.success {
+      background: #eefbf3;
+      color: #16794c;
+    }
+
+    .no-tasks {
+      color: #858791;
+      font-size: 13px;
+      margin-top: 15px;
+    }
+
     .modal {
       position: fixed;
       inset: 0;
-      background: rgba(15, 15, 25, .45);
+      background: rgba(15, 15, 25, 0.45);
       display: none;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      z-index: 20;
+      z-index: 10;
     }
 
     .modal.show {
@@ -406,6 +484,11 @@
       margin-top: 5px;
     }
 
+    .modal-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     .message {
       display: none;
       padding: 12px;
@@ -428,17 +511,8 @@
       color: #16794c;
     }
 
-    .plan-info {
-      background: #f0efff;
-      color: #4942a8;
-      padding: 12px;
-      border-radius: 11px;
-      margin-bottom: 18px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
     @media (max-width: 700px) {
+
       .top-grid {
         grid-template-columns: 1fr;
       }
@@ -463,62 +537,107 @@
         flex: 1;
       }
 
-      .task {
-        flex-wrap: wrap;
-      }
     }
+
   </style>
+
 </head>
+
 
 <body>
 
 <header>
+
   <div class="logo">
     task<span>ly</span>
   </div>
 
-  <button id="logoutButton" class="logout">
+  <button
+    id="logoutButton"
+    class="logout"
+  >
     Se déconnecter
   </button>
+
 </header>
+
 
 <main>
 
   <section class="welcome">
-    <h1 id="welcomeTitle">Bonjour 👋</h1>
-    <p>Voici ton espace personnel Taskly.</p>
+
+    <h1 id="welcomeTitle">
+      Bonjour 👋
+    </h1>
+
+    <p>
+      Voici ton espace personnel Taskly.
+    </p>
+
   </section>
+
 
   <section class="top-grid">
 
     <div class="card coach">
-      <h2>🤖 Ton coach IA</h2>
+
+      <h2>
+        🤖 Ton coach IA
+      </h2>
 
       <p>
-        Dis-moi ce que tu veux accomplir et
-        Taskly construira progressivement
-        un plan personnalisé.
+        Taskly analyse ton objectif et crée
+        automatiquement un plan personnalisé
+        avec des actions adaptées à ta situation.
       </p>
 
-      <button disabled>
-        Bientôt disponible
+      <button
+        type="button"
+        onclick="document.getElementById('openModalButton').click()"
+      >
+        Créer un objectif
       </button>
+
     </div>
+
 
     <div class="card">
 
-      <h3>Ta progression</h3>
+      <h3>
+        Ta progression
+      </h3>
 
       <div class="stats">
 
         <div>
-          <div class="stat-number" id="goalCount">0</div>
-          <div class="stat-label">Objectifs</div>
+
+          <div
+            class="stat-number"
+            id="goalCount"
+          >
+            0
+          </div>
+
+          <div class="stat-label">
+            Objectifs
+          </div>
+
         </div>
 
+
         <div>
-          <div class="stat-number" id="completedTaskCount">0</div>
-          <div class="stat-label">Tâches terminées</div>
+
+          <div
+            class="stat-number"
+            id="completedTaskCount"
+          >
+            0
+          </div>
+
+          <div class="stat-label">
+            Tâches terminées
+          </div>
+
         </div>
 
       </div>
@@ -527,36 +646,57 @@
 
   </section>
 
+
   <section>
 
     <div class="section-header">
 
-      <h2>🎯 Mes objectifs</h2>
+      <h2>
+        🎯 Mes objectifs
+      </h2>
 
-      <button id="openModalButton" class="add-button">
+      <button
+        id="openModalButton"
+        class="add-button"
+      >
         + Nouvel objectif
       </button>
 
     </div>
 
-    <div id="emptyState" class="empty">
 
-      <div class="empty-icon">🎯</div>
+    <div
+      id="emptyState"
+      class="empty"
+    >
 
-      <h3>Aucun objectif pour le moment</h3>
+      <div class="empty-icon">
+        🎯
+      </div>
+
+      <h3>
+        Aucun objectif pour le moment
+      </h3>
 
       <p>
-        Crée ton premier objectif et commence
-        à avancer vers ton résultat.
+        Crée ton premier objectif et laisse
+        Taskly construire ton plan.
       </p>
 
-      <button id="emptyAddButton" class="primary-button">
+      <button
+        id="emptyAddButton"
+        type="button"
+      >
         Créer mon premier objectif
       </button>
 
     </div>
 
-    <div id="goalsList" class="goals"></div>
+
+    <div
+      id="goalsList"
+      class="goals"
+    ></div>
 
   </section>
 
@@ -565,7 +705,10 @@
 
 <!-- MODALE OBJECTIF -->
 
-<div id="goalModal" class="modal">
+<div
+  id="goalModal"
+  class="modal"
+>
 
   <div class="modal-card">
 
@@ -575,17 +718,27 @@
         Nouvel objectif
       </h2>
 
-      <button id="closeModalButton" class="close">
+      <button
+        id="closeModalButton"
+        class="close"
+        type="button"
+      >
         ×
       </button>
 
     </div>
 
-    <div id="modalMessage" class="message"></div>
+
+    <div
+      id="modalMessage"
+      class="message"
+    ></div>
+
 
     <form id="goalForm">
 
       <div class="form-group">
+
         <label for="goalTitle">
           Quel est ton objectif ?
         </label>
@@ -596,7 +749,9 @@
           placeholder="Ex : Courir 5 km"
           required
         >
+
       </div>
+
 
       <div class="form-group">
 
@@ -604,22 +759,43 @@
           Catégorie
         </label>
 
-        <select id="goalCategory" required>
+        <select
+          id="goalCategory"
+          required
+        >
 
           <option value="">
             Choisir une catégorie
           </option>
 
-          <option value="Sport">🏃 Sport</option>
-          <option value="Études">📚 Études</option>
-          <option value="Travail">💼 Travail</option>
-          <option value="Argent">💰 Argent</option>
-          <option value="Personnel">🌱 Personnel</option>
-          <option value="Autre">✨ Autre</option>
+          <option value="Sport">
+            🏃 Sport
+          </option>
+
+          <option value="Études">
+            📚 Études
+          </option>
+
+          <option value="Travail">
+            💼 Travail
+          </option>
+
+          <option value="Argent">
+            💰 Argent
+          </option>
+
+          <option value="Personnel">
+            🌱 Personnel
+          </option>
+
+          <option value="Autre">
+            ✨ Autre
+          </option>
 
         </select>
 
       </div>
+
 
       <div class="form-group">
 
@@ -627,9 +803,13 @@
           Date cible
         </label>
 
-        <input id="targetDate" type="date">
+        <input
+          id="targetDate"
+          type="date"
+        >
 
       </div>
+
 
       <div class="form-group">
 
@@ -644,6 +824,7 @@
 
       </div>
 
+
       <div class="form-group">
 
         <label for="desiredResult">
@@ -652,10 +833,11 @@
 
         <textarea
           id="desiredResult"
-          placeholder="Ex : Courir 5 km sans m'arrêter."
+          placeholder="Ex : Être capable de courir 5 km sans m'arrêter."
         ></textarea>
 
       </div>
+
 
       <div class="form-group">
 
@@ -672,12 +854,13 @@
 
       </div>
 
+
       <button
         id="submitGoalButton"
         class="modal-submit"
         type="submit"
       >
-        Enregistrer mon objectif
+        Créer mon objectif et mon plan IA
       </button>
 
     </form>
@@ -687,76 +870,37 @@
 </div>
 
 
-<!-- MODALE GÉNÉRATEUR DE PLAN -->
-
-<div id="planModal" class="modal">
-
-  <div class="modal-card">
-
-    <div class="modal-header">
-
-      <h2>
-        🚀 Générer mon plan
-      </h2>
-
-      <button id="closePlanModal" class="close">
-        ×
-      </button>
-
-    </div>
-
-    <div id="planMessage" class="message"></div>
-
-    <div class="plan-info">
-      Taskly va créer automatiquement un premier
-      plan d'actions à partir de ton objectif.
-      Tu pourras ensuite cocher chaque tâche
-      lorsque tu l'auras terminée.
-    </div>
-
-    <div class="form-group">
-
-      <label for="planTaskCount">
-        Nombre d'actions à créer
-      </label>
-
-      <select id="planTaskCount">
-
-        <option value="3">3 actions</option>
-        <option value="5" selected>5 actions</option>
-        <option value="7">7 actions</option>
-        <option value="10">10 actions</option>
-
-      </select>
-
-    </div>
-
-    <button
-      id="generatePlanButton"
-      class="modal-submit"
-    >
-      Générer mon plan
-    </button>
-
-  </div>
-
-</div>
-
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="supabase.js"></script>
+
 
 <script>
 
+  /*
+   * URL DU WORKER CLOUDFLARE
+   */
+
+  const AI_WORKER_URL =
+    "https://taskly-ia.taskly30.workers.dev";
+
+
   let currentUser = null;
+
   let editingGoalId = null;
-  let selectedGoalForPlan = null;
+
 
   const modal =
     document.getElementById("goalModal");
 
-  const planModal =
-    document.getElementById("planModal");
+  const openModalButton =
+    document.getElementById("openModalButton");
+
+  const emptyAddButton =
+    document.getElementById("emptyAddButton");
+
+  const closeModalButton =
+    document.getElementById("closeModalButton");
 
   const goalForm =
     document.getElementById("goalForm");
@@ -776,41 +920,11 @@
   const modalMessage =
     document.getElementById("modalMessage");
 
-  const planMessage =
-    document.getElementById("planMessage");
-
   const submitGoalButton =
     document.getElementById("submitGoalButton");
 
   const modalTitle =
     document.getElementById("modalTitle");
-
-
-  function escapeHtml(value) {
-
-    if (
-      value === null ||
-      value === undefined
-    ) {
-      return "";
-    }
-
-    return String(value)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
-
-  function showMessage(element, text, type) {
-
-    element.textContent = text;
-
-    element.className =
-      "message show " + type;
-  }
 
 
   function openCreateModal() {
@@ -821,20 +935,25 @@
       "Nouvel objectif";
 
     submitGoalButton.textContent =
-      "Enregistrer mon objectif";
+      "Créer mon objectif et mon plan IA";
 
     goalForm.reset();
 
     modalMessage.className =
       "message";
 
+    modalMessage.textContent =
+      "";
+
     modal.classList.add("show");
+
   }
 
 
   function openEditModal(goal) {
 
-    editingGoalId = goal.id;
+    editingGoalId =
+      goal.id;
 
     modalTitle.textContent =
       "Modifier mon objectif";
@@ -860,7 +979,14 @@
     document.getElementById("weeklyTime").value =
       goal.weekly_time ?? "";
 
+    modalMessage.className =
+      "message";
+
+    modalMessage.textContent =
+      "";
+
     modal.classList.add("show");
+
   }
 
 
@@ -868,7 +994,8 @@
 
     modal.classList.remove("show");
 
-    editingGoalId = null;
+    editingGoalId =
+      null;
 
     goalForm.reset();
 
@@ -876,62 +1003,33 @@
       "Nouvel objectif";
 
     submitGoalButton.textContent =
-      "Enregistrer mon objectif";
+      "Créer mon objectif et mon plan IA";
 
     modalMessage.className =
       "message";
+
+    modalMessage.textContent =
+      "";
+
   }
 
 
-  function openPlanModal(goal) {
-
-    selectedGoalForPlan = goal;
-
-    planMessage.className =
-      "message";
-
-    planModal.classList.add("show");
-  }
+  openModalButton.addEventListener(
+    "click",
+    openCreateModal
+  );
 
 
-  function closePlanModal() {
-
-    planModal.classList.remove("show");
-
-    selectedGoalForPlan = null;
-  }
+  emptyAddButton.addEventListener(
+    "click",
+    openCreateModal
+  );
 
 
-  document
-    .getElementById("openModalButton")
-    .addEventListener(
-      "click",
-      openCreateModal
-    );
-
-
-  document
-    .getElementById("emptyAddButton")
-    .addEventListener(
-      "click",
-      openCreateModal
-    );
-
-
-  document
-    .getElementById("closeModalButton")
-    .addEventListener(
-      "click",
-      closeModal
-    );
-
-
-  document
-    .getElementById("closePlanModal")
-    .addEventListener(
-      "click",
-      closePlanModal
-    );
+  closeModalButton.addEventListener(
+    "click",
+    closeModal
+  );
 
 
   modal.addEventListener(
@@ -946,16 +1044,18 @@
   );
 
 
-  planModal.addEventListener(
-    "click",
-    function(event) {
+  function showModalMessage(
+    text,
+    type
+  ) {
 
-      if (event.target === planModal) {
-        closePlanModal();
-      }
+    modalMessage.textContent =
+      text;
 
-    }
-  );
+    modalMessage.className =
+      "message show " + type;
+
+  }
 
 
   async function checkUser() {
@@ -968,6 +1068,7 @@
       } =
         await window.tasklySupabase.auth.getUser();
 
+
       if (
         error ||
         !data ||
@@ -978,26 +1079,34 @@
           "login.html";
 
         return false;
+
       }
+
 
       currentUser =
         data.user;
 
+
       const firstName =
         currentUser.user_metadata?.first_name;
+
 
       const fallbackName =
         currentUser.email
           ? currentUser.email.split("@")[0]
           : "toi";
 
+
       const name =
-        firstName || fallbackName;
+        firstName ||
+        fallbackName;
+
 
       document
         .getElementById("welcomeTitle")
         .textContent =
           `Bonjour ${name} 👋`;
+
 
       return true;
 
@@ -1009,7 +1118,9 @@
         "login.html";
 
       return false;
+
     }
+
   }
 
 
@@ -1018,6 +1129,7 @@
     if (!currentUser) {
       return;
     }
+
 
     const {
       data,
@@ -1037,17 +1149,25 @@
           }
         );
 
+
     if (error) {
 
       console.error(error);
 
       return;
+
     }
 
-    goalCount.textContent =
-      data.length;
 
-    if (data.length === 0) {
+    const goals =
+      data || [];
+
+
+    goalCount.textContent =
+      goals.length;
+
+
+    if (goals.length === 0) {
 
       emptyState.style.display =
         "block";
@@ -1059,7 +1179,9 @@
         "0";
 
       return;
+
     }
+
 
     emptyState.style.display =
       "none";
@@ -1067,28 +1189,36 @@
     goalsList.innerHTML =
       "";
 
-    let totalCompletedTasks = 0;
 
-    for (const goal of data) {
+    let totalCompleted =
+      0;
+
+
+    for (const goal of goals) {
 
       const tasks =
         await loadTasksForGoal(
           goal.id
         );
 
-      totalCompletedTasks +=
+
+      totalCompleted +=
         tasks.filter(
           task => task.completed
         ).length;
+
 
       renderGoal(
         goal,
         tasks
       );
+
     }
 
+
     completedTaskCount.textContent =
-      totalCompletedTasks;
+      totalCompleted;
+
   }
 
 
@@ -1112,9 +1242,17 @@
         .order(
           "due_date",
           {
+            ascending: true,
+            nullsFirst: false
+          }
+        )
+        .order(
+          "created_at",
+          {
             ascending: true
           }
         );
+
 
     if (error) {
 
@@ -1124,37 +1262,49 @@
       );
 
       return [];
+
     }
 
+
     return data || [];
+
   }
 
 
-  function renderGoal(goal, tasks) {
+  function renderGoal(
+    goal,
+    tasks
+  ) {
 
     const element =
       document.createElement("div");
 
+
     element.className =
       "goal";
 
-    const completed =
+
+    const totalTasks =
+      tasks.length;
+
+
+    const completedTasks =
       tasks.filter(
         task => task.completed
       ).length;
 
-    const total =
-      tasks.length;
 
-    const percentage =
-      total > 0
+    const progress =
+      totalTasks > 0
         ? Math.round(
-            (completed / total) * 100
+            (completedTasks / totalTasks) * 100
           )
         : 0;
 
+
     let dateText =
       "Aucune date cible";
+
 
     if (goal.target_date) {
 
@@ -1164,12 +1314,15 @@
           "T00:00:00"
         );
 
+
       dateText =
         "Objectif pour le " +
         date.toLocaleDateString(
           "fr-FR"
         );
+
     }
+
 
     element.innerHTML = `
 
@@ -1194,22 +1347,15 @@
         <div class="goal-actions">
 
           <button
-            class="plan-button"
             type="button"
-          >
-            🚀 Générer un plan
-          </button>
-
-          <button
             class="edit-goal"
-            type="button"
           >
             Modifier
           </button>
 
           <button
-            class="delete-goal"
             type="button"
+            class="delete-goal"
           >
             Supprimer
           </button>
@@ -1217,6 +1363,7 @@
         </div>
 
       </div>
+
 
       <div class="progress-area">
 
@@ -1227,7 +1374,7 @@
           </span>
 
           <span>
-            ${percentage}%
+            ${completedTasks}/${totalTasks} · ${progress}%
           </span>
 
         </div>
@@ -1236,22 +1383,22 @@
 
           <div
             class="progress-fill"
-            style="width:${percentage}%"
+            style="width:${progress}%"
           ></div>
 
         </div>
 
       </div>
 
+
       <div class="tasks">
 
         ${
           tasks.length === 0
             ? `
-              <p style="color:#777a83;font-size:14px;">
-                Aucune tâche pour cet objectif.
-                Génère ton premier plan 🚀
-              </p>
+              <div class="no-tasks">
+                Aucune action pour le moment.
+              </div>
             `
             : tasks.map(
                 task => renderTaskHtml(task)
@@ -1259,42 +1406,93 @@
         }
 
       </div>
+
+
+      <div class="generate-area">
+
+        <button
+          type="button"
+          class="generate-button"
+        >
+          🤖 ${
+            tasks.length === 0
+              ? "Générer mon plan avec l'IA"
+              : "Générer de nouvelles actions avec l'IA"
+          }
+        </button>
+
+        <div class="ai-status"></div>
+
+      </div>
+
     `;
 
-    goalsList.appendChild(element);
 
-    element
-      .querySelector(".plan-button")
-      .addEventListener(
-        "click",
-        function() {
-          openPlanModal(goal);
-        }
+    goalsList.appendChild(
+      element
+    );
+
+
+    const editButton =
+      element.querySelector(
+        ".edit-goal"
       );
 
-    element
-      .querySelector(".edit-goal")
-      .addEventListener(
-        "click",
-        function() {
-          openEditModal(goal);
-        }
+
+    const deleteButton =
+      element.querySelector(
+        ".delete-goal"
       );
 
-    element
-      .querySelector(".delete-goal")
-      .addEventListener(
-        "click",
-        function() {
-          deleteGoal(goal.id);
-        }
+
+    const generateButton =
+      element.querySelector(
+        ".generate-button"
       );
+
+
+    editButton.addEventListener(
+      "click",
+      function() {
+
+        openEditModal(
+          goal
+        );
+
+      }
+    );
+
+
+    deleteButton.addEventListener(
+      "click",
+      function() {
+
+        deleteGoal(
+          goal.id
+        );
+
+      }
+    );
+
+
+    generateButton.addEventListener(
+      "click",
+      function() {
+
+        generatePlan(
+          goal,
+          generateButton,
+          element.querySelector(".ai-status")
+        );
+
+      }
+    );
 
 
     element
       .querySelectorAll(".task-checkbox")
       .forEach(
-        function(checkbox) {
+        checkbox => {
 
           checkbox.addEventListener(
             "change",
@@ -1307,6 +1505,7 @@
 
             }
           );
+
         }
       );
 
@@ -1314,7 +1513,7 @@
     element
       .querySelectorAll(".task-delete")
       .forEach(
-        function(button) {
+        button => {
 
           button.addEventListener(
             "click",
@@ -1326,14 +1525,18 @@
 
             }
           );
+
         }
       );
+
   }
 
 
   function renderTaskHtml(task) {
 
-    let dateText = "";
+    let dueText =
+      "";
+
 
     if (task.due_date) {
 
@@ -1343,19 +1546,25 @@
           "T00:00:00"
         );
 
-      dateText =
+
+      dueText =
+        "À faire le " +
         date.toLocaleDateString(
           "fr-FR"
         );
+
     }
+
 
     return `
 
-      <div class="task ${
-        task.completed
-          ? "completed"
-          : ""
-      }">
+      <div
+        class="task ${
+          task.completed
+            ? "completed"
+            : ""
+        }"
+      >
 
         <input
           type="checkbox"
@@ -1368,31 +1577,259 @@
           }
         >
 
-        <span class="task-title">
-          ${escapeHtml(task.title)}
-        </span>
+        <div class="task-content">
 
-        ${
-          dateText
-            ? `
-              <span class="task-date">
-                ${escapeHtml(dateText)}
-              </span>
-            `
-            : ""
-        }
+          <div class="task-title">
+            ${escapeHtml(task.title)}
+          </div>
+
+          ${
+            dueText
+              ? `
+                <div class="task-date">
+                  ${escapeHtml(dueText)}
+                </div>
+              `
+              : ""
+          }
+
+        </div>
 
         <button
+          type="button"
           class="task-delete"
           data-id="${escapeHtml(task.id)}"
-          type="button"
           title="Supprimer"
         >
           ×
         </button>
 
       </div>
+
     `;
+
+  }
+
+
+  async function generatePlan(
+    goal,
+    button,
+    statusElement
+  ) {
+
+    if (!currentUser) {
+      return;
+    }
+
+
+    button.disabled =
+      true;
+
+    button.textContent =
+      "🤖 L'IA analyse ton objectif...";
+
+
+    statusElement.className =
+      "ai-status show";
+
+    statusElement.textContent =
+      "Création de ton plan personnalisé...";
+
+
+    try {
+
+      const response =
+        await fetch(
+          AI_WORKER_URL,
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+              title:
+                goal.title,
+
+              category:
+                goal.category,
+
+              target_date:
+                goal.target_date,
+
+              current_level:
+                goal.current_level,
+
+              desired_result:
+                goal.desired_result,
+
+              weekly_time:
+                goal.weekly_time
+
+            })
+
+          }
+        );
+
+
+      const responseText =
+        await response.text();
+
+
+      let result;
+
+
+      try {
+
+        result =
+          JSON.parse(
+            responseText
+          );
+
+      } catch {
+
+        throw new Error(
+          "Réponse invalide du serveur IA."
+        );
+
+      }
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          result.error ||
+          "Le service IA a rencontré une erreur."
+        );
+
+      }
+
+
+      if (
+        !result.tasks ||
+        !Array.isArray(result.tasks)
+      ) {
+
+        throw new Error(
+          "L'IA n'a fourni aucune action."
+        );
+
+      }
+
+
+      if (
+        result.tasks.length === 0
+      ) {
+
+        throw new Error(
+          "L'IA n'a généré aucune tâche."
+        );
+
+      }
+
+
+      const tasksToInsert =
+        result.tasks
+          .filter(
+            task =>
+              task &&
+              task.title &&
+              task.title.trim()
+          )
+          .map(
+            task => ({
+
+              user_id:
+                currentUser.id,
+
+              goal_id:
+                goal.id,
+
+              title:
+                task.title.trim(),
+
+              completed:
+                false,
+
+              due_date:
+                task.due_date || null
+
+            })
+          );
+
+
+      if (
+        tasksToInsert.length === 0
+      ) {
+
+        throw new Error(
+          "Les actions générées sont invalides."
+        );
+
+      }
+
+
+      const {
+        error: insertError
+      } =
+        await window.tasklySupabase
+          .from("tasks")
+          .insert(
+            tasksToInsert
+          );
+
+
+      if (insertError) {
+
+        console.error(
+          insertError
+        );
+
+        throw new Error(
+          "Impossible d'enregistrer les actions : " +
+          insertError.message
+        );
+
+      }
+
+
+      statusElement.className =
+        "ai-status show success";
+
+      statusElement.textContent =
+        `${tasksToInsert.length} actions personnalisées ont été créées.`;
+
+
+      await loadGoals();
+
+
+    } catch (error) {
+
+      console.error(
+        "Erreur génération IA :",
+        error
+      );
+
+
+      statusElement.className =
+        "ai-status show error";
+
+      statusElement.textContent =
+        error.message ||
+        "Une erreur est survenue.";
+
+    } finally {
+
+      button.disabled =
+        false;
+
+      button.textContent =
+        "🤖 Générer de nouvelles actions avec l'IA";
+
+    }
+
   }
 
 
@@ -1407,7 +1844,8 @@
       await window.tasklySupabase
         .from("tasks")
         .update({
-          completed: completed
+          completed:
+            completed
         })
         .eq(
           "id",
@@ -1418,33 +1856,44 @@
           currentUser.id
         );
 
+
     if (error) {
 
-      console.error(error);
+      console.error(
+        error
+      );
 
       alert(
-        "Impossible de sauvegarder la tâche."
+        "Impossible de modifier cette tâche : " +
+        error.message
       );
 
       await loadGoals();
 
       return;
+
     }
 
+
     await loadGoals();
+
   }
 
 
-  async function deleteTask(taskId) {
+  async function deleteTask(
+    taskId
+  ) {
 
     const confirmed =
       confirm(
-        "Supprimer cette tâche ?"
+        "Supprimer cette action ?"
       );
+
 
     if (!confirmed) {
       return;
     }
+
 
     const {
       error
@@ -1461,205 +1910,70 @@
           currentUser.id
         );
 
+
     if (error) {
 
       alert(
-        "Impossible de supprimer la tâche : " +
+        "Impossible de supprimer l'action : " +
         error.message
       );
 
       return;
+
     }
 
+
     await loadGoals();
+
   }
 
 
-  async function generatePlan() {
+  async function deleteGoal(
+    id
+  ) {
 
-    if (
-      !selectedGoalForPlan ||
-      !currentUser
-    ) {
+    const confirmed =
+      confirm(
+        "Supprimer cet objectif ? Les actions associées pourront également être supprimées selon ta configuration Supabase."
+      );
+
+
+    if (!confirmed) {
       return;
     }
 
-    const button =
-      document.getElementById(
-        "generatePlanButton"
-      );
 
-    const numberOfTasks =
-      Number(
-        document.getElementById(
-          "planTaskCount"
-        ).value
-      );
-
-    button.disabled = true;
-
-    button.textContent =
-      "Création du plan...";
-
-    try {
-
-      const goal =
-        selectedGoalForPlan;
-
-      const existingTasks =
-        await loadTasksForGoal(
-          goal.id
-        );
-
-      if (existingTasks.length > 0) {
-
-        const replace =
-          confirm(
-            "Cet objectif possède déjà des tâches. Voulez-vous ajouter un nouveau plan ?"
-          );
-
-        if (!replace) {
-          return;
-        }
-      }
-
-
-      const tasksToCreate = [];
-
-      const startDate =
-        new Date();
-
-
-      for (
-        let i = 0;
-        i < numberOfTasks;
-        i++
-      ) {
-
-        const dueDate =
-          new Date(startDate);
-
-        dueDate.setDate(
-          startDate.getDate() + i
+    const {
+      error
+    } =
+      await window.tasklySupabase
+        .from("goals")
+        .delete()
+        .eq(
+          "id",
+          id
+        )
+        .eq(
+          "user_id",
+          currentUser.id
         );
 
 
-        let taskTitle;
+    if (error) {
 
-
-        if (numberOfTasks === 3) {
-
-          const templates = [
-            `Définir précisément les premières étapes pour "${goal.title}"`,
-            `Réaliser une première action concrète pour "${goal.title}"`,
-            `Faire le point sur les progrès réalisés`
-          ];
-
-          taskTitle =
-            templates[i];
-
-        } else {
-
-          const templates = [
-            `Définir la première étape vers "${goal.title}"`,
-            `Commencer une première action concrète`,
-            `Continuer l'effort et rester régulier`,
-            `Faire une action supplémentaire pour avancer`,
-            `Évaluer les premiers progrès`,
-            `Corriger ce qui peut être amélioré`,
-            `Faire le point sur l'objectif`
-          ];
-
-          taskTitle =
-            templates[
-              i % templates.length
-            ];
-        }
-
-
-        tasksToCreate.push({
-
-          user_id:
-            currentUser.id,
-
-          goal_id:
-            goal.id,
-
-          title:
-            taskTitle,
-
-          completed:
-            false,
-
-          due_date:
-            dueDate
-              .toISOString()
-              .split("T")[0]
-
-        });
-      }
-
-
-      const {
-        error
-      } =
-        await window.tasklySupabase
-          .from("tasks")
-          .insert(
-            tasksToCreate
-          );
-
-
-      if (error) {
-
-        console.error(error);
-
-        showMessage(
-          planMessage,
-          "Impossible de créer le plan : " +
-          error.message,
-          "error"
-        );
-
-        return;
-      }
-
-
-      closePlanModal();
-
-      await loadGoals();
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      showMessage(
-        planMessage,
-        "Une erreur est survenue : " +
-        error.message,
-        "error"
+      alert(
+        "Impossible de supprimer l'objectif : " +
+        error.message
       );
 
-    } finally {
+      return;
 
-      button.disabled =
-        false;
-
-      button.textContent =
-        "Générer mon plan";
     }
+
+
+    await loadGoals();
+
   }
-
-
-  document
-    .getElementById(
-      "generatePlanButton"
-    )
-    .addEventListener(
-      "click",
-      generatePlan
-    );
 
 
   goalForm.addEventListener(
@@ -1668,15 +1982,16 @@
 
       event.preventDefault();
 
+
       if (!currentUser) {
 
-        showMessage(
-          modalMessage,
+        showModalMessage(
           "Ta session a expiré. Reconnecte-toi.",
           "error"
         );
 
         return;
+
       }
 
 
@@ -1686,15 +2001,18 @@
           .value
           .trim();
 
+
       const category =
         document
           .getElementById("goalCategory")
           .value;
 
+
       const targetDate =
         document
           .getElementById("targetDate")
           .value;
+
 
       const currentLevel =
         document
@@ -1702,16 +2020,19 @@
           .value
           .trim();
 
+
       const desiredResult =
         document
           .getElementById("desiredResult")
           .value
           .trim();
 
+
       const weeklyTimeValue =
         document
           .getElementById("weeklyTime")
           .value;
+
 
       const weeklyTime =
         weeklyTimeValue
@@ -1721,23 +2042,24 @@
 
       if (!title) {
 
-        showMessage(
-          modalMessage,
+        showModalMessage(
           "Indique un objectif.",
           "error"
         );
 
         return;
+
       }
 
 
       submitGoalButton.disabled =
         true;
 
+
       submitGoalButton.textContent =
         editingGoalId
           ? "Modification..."
-          : "Enregistrement...";
+          : "Création de l'objectif...";
 
 
       try {
@@ -1780,6 +2102,7 @@
                 currentUser.id
               );
 
+
         } else {
 
           result =
@@ -1808,38 +2131,137 @@
                 weekly_time:
                   weeklyTime
 
-              });
+              })
+              .select()
+              .single();
+
         }
 
 
         if (result.error) {
 
-          console.error(
-            result.error
-          );
+          throw result.error;
 
-          showMessage(
-            modalMessage,
-            "Impossible d'enregistrer l'objectif : " +
-            result.error.message,
-            "error"
-          );
-
-          return;
         }
 
 
+        /*
+         * MODIFICATION D'OBJECTIF
+         *
+         * On ne régénère pas automatiquement les tâches
+         * pour éviter de créer des doublons.
+         */
+
+        if (editingGoalId) {
+
+          closeModal();
+
+          await loadGoals();
+
+          return;
+
+        }
+
+
+        /*
+         * NOUVEL OBJECTIF
+         *
+         * On récupère l'objectif créé afin d'avoir son ID.
+         */
+
+        const createdGoal =
+          result.data;
+
+
+        if (
+          !createdGoal ||
+          !createdGoal.id
+        ) {
+
+          throw new Error(
+            "L'objectif a été créé mais son identifiant est introuvable."
+          );
+
+        }
+
+
+        /*
+         * Fermer la modale
+         */
+
         closeModal();
+
+
+        /*
+         * Afficher immédiatement les objectifs
+         */
 
         await loadGoals();
 
 
+        /*
+         * Générer automatiquement le plan IA
+         */
+
+        const goalElement =
+          Array.from(
+            goalsList.querySelectorAll(".goal")
+          ).find(
+            element =>
+              element
+                .querySelector(".goal-info h3")
+                ?.textContent === title
+          );
+
+
+        if (goalElement) {
+
+          const generateButton =
+            goalElement.querySelector(
+              ".generate-button"
+            );
+
+          const statusElement =
+            goalElement.querySelector(
+              ".ai-status"
+            );
+
+
+          if (
+            generateButton &&
+            statusElement
+          ) {
+
+            await generatePlan(
+              createdGoal,
+              generateButton,
+              statusElement
+            );
+
+          }
+
+        } else {
+
+          /*
+           * Sécurité :
+           * si l'élément n'est pas trouvé,
+           * on génère directement.
+           */
+
+          await generatePlanDirectly(
+            createdGoal
+          );
+
+        }
+
+
       } catch (error) {
 
-        console.error(error);
+        console.error(
+          error
+        );
 
-        showMessage(
-          modalMessage,
+        showModalMessage(
           "Une erreur est survenue : " +
           error.message,
           "error"
@@ -1851,52 +2273,192 @@
           false;
 
         submitGoalButton.textContent =
-          "Enregistrer mon objectif";
+          editingGoalId
+            ? "Enregistrer les modifications"
+            : "Créer mon objectif et mon plan IA";
+
       }
+
     }
   );
 
 
-  async function deleteGoal(id) {
+  /*
+   * Génération de secours si le nouvel objectif
+   * n'a pas encore été retrouvé dans le DOM.
+   */
 
-    const confirmed =
-      confirm(
-        "Supprimer cet objectif ? Les tâches associées pourront également être supprimées selon la configuration de ta base de données."
-      );
+  async function generatePlanDirectly(
+    goal
+  ) {
 
-    if (!confirmed) {
-      return;
-    }
+    try {
 
+      const response =
+        await fetch(
+          AI_WORKER_URL,
+          {
+            method: "POST",
 
-    const {
-      error
-    } =
-      await window.tasklySupabase
-        .from("goals")
-        .delete()
-        .eq(
-          "id",
-          id
-        )
-        .eq(
-          "user_id",
-          currentUser.id
+            headers: {
+              "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+              title:
+                goal.title,
+
+              category:
+                goal.category,
+
+              target_date:
+                goal.target_date,
+
+              current_level:
+                goal.current_level,
+
+              desired_result:
+                goal.desired_result,
+
+              weekly_time:
+                goal.weekly_time
+
+            })
+
+          }
         );
 
 
-    if (error) {
+      const responseText =
+        await response.text();
 
-      alert(
-        "Impossible de supprimer l'objectif : " +
-        error.message
+
+      const result =
+        JSON.parse(
+          responseText
+        );
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          result.error ||
+          "Erreur du service IA."
+        );
+
+      }
+
+
+      const tasksToInsert =
+        (result.tasks || [])
+          .filter(
+            task =>
+              task &&
+              task.title &&
+              task.title.trim()
+          )
+          .map(
+            task => ({
+
+              user_id:
+                currentUser.id,
+
+              goal_id:
+                goal.id,
+
+              title:
+                task.title.trim(),
+
+              completed:
+                false,
+
+              due_date:
+                task.due_date || null
+
+            })
+          );
+
+
+      if (
+        tasksToInsert.length > 0
+      ) {
+
+        const {
+          error
+        } =
+          await window.tasklySupabase
+            .from("tasks")
+            .insert(
+              tasksToInsert
+            );
+
+
+        if (error) {
+          throw error;
+        }
+
+      }
+
+
+      await loadGoals();
+
+
+    } catch (error) {
+
+      console.error(
+        "Erreur IA :",
+        error
       );
 
-      return;
+      await loadGoals();
+
+    }
+
+  }
+
+
+  function escapeHtml(
+    value
+  ) {
+
+    if (
+      value === null ||
+      value === undefined
+    ) {
+
+      return "";
+
     }
 
 
-    await loadGoals();
+    return String(value)
+
+      .replaceAll(
+        "&",
+        "&amp;"
+      )
+
+      .replaceAll(
+        "<",
+        "&lt;"
+      )
+
+      .replaceAll(
+        ">",
+        "&gt;"
+      )
+
+      .replaceAll(
+        '"',
+        "&quot;"
+      )
+
+      .replaceAll(
+        "'",
+        "&#039;"
+      );
+
   }
 
 
@@ -1911,6 +2473,7 @@
 
         window.location.href =
           "index.html";
+
       }
     );
 
@@ -1920,11 +2483,14 @@
     const loggedIn =
       await checkUser();
 
+
     if (!loggedIn) {
       return;
     }
 
+
     await loadGoals();
+
   }
 
 
@@ -1933,4 +2499,5 @@
 </script>
 
 </body>
+
 </html>
