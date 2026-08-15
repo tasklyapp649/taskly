@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Taskly — Transforme tes objectifs en actions</title>
+
   <meta
     name="description"
     content="Taskly t'aide à transformer tes objectifs en actions concrètes et à suivre ta progression."
@@ -63,7 +64,6 @@
       gap: 20px;
     }
 
-    /* Logo entièrement cliquable */
     .logo {
       display: inline-flex;
       align-items: center;
@@ -386,7 +386,7 @@
     }
 
     /* =========================
-       HOW IT WORKS
+       STEPS
     ========================= */
 
     .steps-section {
@@ -427,6 +427,123 @@
     .step p {
       color: #71727d;
       font-size: 14px;
+    }
+
+    /* =========================
+       PRICING
+    ========================= */
+
+    .pricing-section {
+      padding: 95px 0;
+      background: #f7f8fc;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      max-width: 850px;
+      margin: 0 auto;
+      align-items: stretch;
+    }
+
+    .pricing-card {
+      position: relative;
+      background: white;
+      border: 1px solid #e3e4eb;
+      border-radius: 22px;
+      padding: 32px;
+      box-shadow: 0 12px 35px rgba(30, 30, 50, 0.04);
+    }
+
+    .pricing-card.premium {
+      border: 2px solid #635bff;
+      box-shadow: 0 18px 50px rgba(99, 91, 255, 0.13);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #635bff;
+      color: white;
+      padding: 6px 13px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .pricing-name {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .pricing-description {
+      color: #777883;
+      font-size: 14px;
+      min-height: 42px;
+      margin-bottom: 20px;
+    }
+
+    .pricing-price {
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+      margin-bottom: 5px;
+    }
+
+    .pricing-price strong {
+      font-size: 42px;
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .pricing-price span {
+      color: #777883;
+      font-size: 13px;
+    }
+
+    .annual-price {
+      color: #635bff;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .pricing-list {
+      list-style: none;
+      margin: 0 0 26px;
+    }
+
+    .pricing-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #4f505a;
+      font-size: 14px;
+      margin-bottom: 13px;
+    }
+
+    .check {
+      color: #635bff;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .pricing-card .btn {
+      width: 100%;
+    }
+
+    .pricing-note {
+      text-align: center;
+      max-width: 650px;
+      margin: 28px auto 0;
+      color: #858691;
+      font-size: 12px;
+      line-height: 1.6;
     }
 
     /* =========================
@@ -514,6 +631,11 @@
         grid-template-columns: 1fr;
       }
 
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+      }
+
       .dashboard-preview {
         transform: none;
       }
@@ -561,8 +683,13 @@
       }
 
       .section,
+      .pricing-section,
       .cta {
         padding: 65px 0;
+      }
+
+      .pricing-card {
+        padding: 27px 23px;
       }
 
       .cta-box {
@@ -582,14 +709,11 @@
 
 <body>
 
-  <!-- =========================
-       HEADER
-  ========================= -->
+  <!-- HEADER -->
 
   <header>
     <div class="container navbar">
 
-      <!-- Logo : retour vers index.html -->
       <a href="index.html" class="logo" aria-label="Retour à l'accueil Taskly">
         <span class="logo-icon">✓</span>
         <span>Taskly</span>
@@ -608,16 +732,16 @@
     </div>
   </header>
 
-  <!-- =========================
-       HERO
-  ========================= -->
 
   <main>
+
+    <!-- HERO -->
 
     <section class="hero">
       <div class="container hero-grid">
 
         <div>
+
           <div class="badge">
             <span class="badge-dot"></span>
             Ton objectif. Ton plan. Ta progression.
@@ -635,6 +759,7 @@
           </p>
 
           <div class="hero-buttons">
+
             <a href="signup.html" class="btn btn-primary">
               Commencer gratuitement →
             </a>
@@ -642,10 +767,14 @@
             <a href="login.html" class="btn btn-secondary">
               Se connecter
             </a>
+
           </div>
+
         </div>
 
-        <!-- Aperçu du dashboard -->
+
+        <!-- APERÇU DASHBOARD -->
+
         <div class="preview-wrapper">
 
           <div class="preview-glow"></div>
@@ -653,8 +782,13 @@
           <div class="dashboard-preview">
 
             <div class="preview-top">
-              <div class="preview-title">Mon espace</div>
-              <div class="preview-avatar">S</div>
+              <div class="preview-title">
+                Mon espace
+              </div>
+
+              <div class="preview-avatar">
+                S
+              </div>
             </div>
 
             <div class="preview-welcome">
@@ -663,7 +797,10 @@
             </div>
 
             <div class="preview-coach">
-              <div class="coach-label">TON COACH IA</div>
+              <div class="coach-label">
+                TON COACH IA
+              </div>
+
               <p>
                 Chaque objectif commence par une petite action.
                 Commençons ensemble.
@@ -685,114 +822,361 @@
             </div>
 
           </div>
+
         </div>
 
       </div>
     </section>
 
-    <!-- =========================
-         FEATURES
-    ========================= -->
+
+    <!-- FONCTIONNALITÉS -->
 
     <section class="section">
+
       <div class="container">
 
         <div class="section-header">
-          <h2>Tout ce qu'il faut pour avancer.</h2>
+
+          <h2>
+            Tout ce qu'il faut pour avancer.
+          </h2>
+
           <p>
             Taskly rassemble tes objectifs, tes actions et ta progression
             dans un espace simple et personnel.
           </p>
+
         </div>
+
 
         <div class="features">
 
           <div class="feature-card">
-            <div class="feature-icon">🎯</div>
-            <h3>Objectifs clairs</h3>
+
+            <div class="feature-icon">
+              🎯
+            </div>
+
+            <h3>
+              Objectifs clairs
+            </h3>
+
             <p>
               Définis précisément ce que tu veux accomplir,
               avec une date cible et un résultat souhaité.
             </p>
+
           </div>
 
+
           <div class="feature-card">
-            <div class="feature-icon">✓</div>
-            <h3>Actions concrètes</h3>
+
+            <div class="feature-icon">
+              ✓
+            </div>
+
+            <h3>
+              Actions concrètes
+            </h3>
+
             <p>
               Transforme progressivement tes grands objectifs
               en petites actions faciles à réaliser.
             </p>
+
           </div>
 
+
           <div class="feature-card">
-            <div class="feature-icon">📈</div>
-            <h3>Progression</h3>
+
+            <div class="feature-icon">
+              📈
+            </div>
+
+            <h3>
+              Progression
+            </h3>
+
             <p>
               Visualise tes efforts, tes tâches terminées
               et les progrès réalisés vers tes objectifs.
             </p>
+
           </div>
 
         </div>
 
       </div>
+
     </section>
 
-    <!-- =========================
-         HOW IT WORKS
-    ========================= -->
+
+    <!-- COMMENT ÇA MARCHE -->
 
     <section class="section steps-section">
+
       <div class="container">
 
         <div class="section-header">
-          <h2>Simple. De l'idée à l'action.</h2>
+
+          <h2>
+            Simple. De l'idée à l'action.
+          </h2>
+
           <p>
             Pas besoin de compliquer tes objectifs.
           </p>
+
         </div>
+
 
         <div class="steps">
 
           <div class="step">
-            <div class="step-number">1</div>
-            <h3>Définis ton objectif</h3>
+
+            <div class="step-number">
+              1
+            </div>
+
+            <h3>
+              Définis ton objectif
+            </h3>
+
             <p>
               Explique à Taskly ce que tu veux accomplir.
             </p>
+
           </div>
 
+
           <div class="step">
-            <div class="step-number">2</div>
-            <h3>Construis ton plan</h3>
+
+            <div class="step-number">
+              2
+            </div>
+
+            <h3>
+              Construis ton plan
+            </h3>
+
             <p>
               Transforme ton objectif en actions concrètes.
             </p>
+
           </div>
 
+
           <div class="step">
-            <div class="step-number">3</div>
-            <h3>Suis ta progression</h3>
+
+            <div class="step-number">
+              3
+            </div>
+
+            <h3>
+              Suis ta progression
+            </h3>
+
             <p>
               Avance étape par étape et visualise tes résultats.
             </p>
+
           </div>
 
         </div>
 
       </div>
+
     </section>
 
-    <!-- =========================
-         CTA
-    ========================= -->
+
+    <!-- TARIFS -->
+
+    <section class="pricing-section" id="tarifs">
+
+      <div class="container">
+
+        <div class="section-header">
+
+          <h2>
+            Choisis la formule qui te correspond.
+          </h2>
+
+          <p>
+            Commence gratuitement et passe à Premium lorsque tu veux aller plus loin.
+          </p>
+
+        </div>
+
+
+        <div class="pricing-grid">
+
+
+          <!-- GRATUIT -->
+
+          <div class="pricing-card">
+
+            <div class="pricing-name">
+              Taskly Gratuit
+            </div>
+
+            <div class="pricing-description">
+              L'essentiel pour commencer à transformer tes objectifs en actions.
+            </div>
+
+            <div class="pricing-price">
+
+              <strong>
+                0€
+              </strong>
+
+              <span>
+                /mois
+              </span>
+
+            </div>
+
+            <div class="annual-price">
+              Gratuit pour toujours
+            </div>
+
+
+            <ul class="pricing-list">
+
+              <li>
+                <span class="check">✓</span>
+                Jusqu'à 3 objectifs
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                Actions et tâches de base
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                Suivi de progression
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                Statistiques simples
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                Accès à ton espace personnel
+              </li>
+
+            </ul>
+
+
+            <a href="signup.html" class="btn btn-secondary">
+              Commencer gratuitement
+            </a>
+
+          </div>
+
+
+          <!-- PREMIUM -->
+
+          <div class="pricing-card premium">
+
+            <div class="popular-badge">
+              LE PLUS POPULAIRE
+            </div>
+
+            <div class="pricing-name">
+              Taskly Premium
+            </div>
+
+            <div class="pricing-description">
+              Pour celles et ceux qui veulent aller plus loin et progresser davantage.
+            </div>
+
+            <div class="pricing-price">
+
+              <strong>
+                4,99€
+              </strong>
+
+              <span>
+                /mois
+              </span>
+
+            </div>
+
+            <div class="annual-price">
+              ou 39,99€ / an — économise environ 33%
+            </div>
+
+
+            <ul class="pricing-list">
+
+              <li>
+                <span class="check">✓</span>
+                Objectifs illimités
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                Plans personnalisés
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                Coach IA avancé
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                Statistiques avancées
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                Historique complet
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                Futures fonctionnalités Premium
+              </li>
+
+            </ul>
+
+
+            <!-- Pas de paiement pour le moment -->
+            <a href="signup.html" class="btn btn-primary">
+              Découvrir Premium
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <p class="pricing-note">
+          Les fonctionnalités et tarifs Premium présentés ici sont indicatifs
+          pendant la phase de développement de Taskly. Aucun paiement n'est
+          actuellement effectué sur ce site.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- CTA FINAL -->
 
     <section class="cta">
+
       <div class="container">
 
         <div class="cta-box">
-          <h2>Prêt à commencer ?</h2>
+
+          <h2>
+            Prêt à commencer ?
+          </h2>
 
           <p>
             Crée ton compte gratuitement et commence à transformer
@@ -802,18 +1186,20 @@
           <a href="signup.html" class="btn">
             Commencer gratuitement →
           </a>
+
         </div>
 
       </div>
+
     </section>
 
   </main>
 
-  <!-- =========================
-       FOOTER
-  ========================= -->
+
+  <!-- FOOTER -->
 
   <footer>
+
     <div class="container footer-content">
 
       <div class="footer-logo">
@@ -825,6 +1211,7 @@
       </div>
 
     </div>
+
   </footer>
 
 </body>
