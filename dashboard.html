@@ -95,7 +95,6 @@
     .card {
       background: white;
       border: 1px solid #e5e6eb;
-
       border-radius: 20px;
       padding: 25px;
     }
@@ -229,8 +228,14 @@
 
       display: flex;
       justify-content: space-between;
+
       gap: 20px;
       align-items: center;
+    }
+
+    .goal-info {
+      min-width: 0;
+      flex: 1;
     }
 
     .goal-info h3 {
@@ -260,9 +265,34 @@
       font-weight: 700;
     }
 
+    .goal-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .edit-goal {
+      border: none;
+      background: #f0efff;
+
+      color: #635bff;
+
+      padding: 9px 12px;
+
+      border-radius: 9px;
+
+      cursor: pointer;
+
+      font-weight: 600;
+    }
+
+    .edit-goal:hover {
+      background: #e8e6ff;
+    }
+
     .delete-goal {
       border: none;
-
       background: #fff0f0;
 
       color: #b42318;
@@ -274,6 +304,10 @@
       cursor: pointer;
 
       font-weight: 600;
+    }
+
+    .delete-goal:hover {
+      background: #ffe5e5;
     }
 
     .modal {
@@ -452,8 +486,12 @@
         align-items: flex-start;
       }
 
-      .delete-goal {
+      .goal-actions {
         width: 100%;
+      }
+
+      .goal-actions button {
+        flex: 1;
       }
 
     }
@@ -565,6 +603,7 @@
 
   <section>
 
+
     <div class="section-header">
 
       <h2>
@@ -611,13 +650,14 @@
       class="goals"
     ></div>
 
+
   </section>
 
 
 </main>
 
 
-<!-- MODALE DE CRÉATION -->
+<!-- MODALE OBJECTIF -->
 
 <div
   id="goalModal"
@@ -626,15 +666,17 @@
 
   <div class="modal-card">
 
+
     <div class="modal-header">
 
-      <h2>
+      <h2 id="modalTitle">
         Nouvel objectif
       </h2>
 
       <button
         id="closeModalButton"
         class="close"
+        type="button"
       >
         ×
       </button>
@@ -780,6 +822,7 @@
 
     </form>
 
+
   </div>
 
 </div>
@@ -793,6 +836,8 @@
 <script>
 
   let currentUser = null;
+
+  let editingGoalId = null;
 
 
   const modal =
@@ -825,8 +870,78 @@
   const submitGoalButton =
     document.getElementById("submitGoalButton");
 
+  const modalTitle =
+    document.getElementById("modalTitle");
 
-  function openModal() {
+
+  function openCreateModal() {
+
+    editingGoalId = null;
+
+    modalTitle.textContent =
+      "Nouvel objectif";
+
+    submitGoalButton.textContent =
+      "Enregistrer mon objectif";
+
+    goalForm.reset();
+
+    modalMessage.className =
+      "message";
+
+    modalMessage.textContent =
+      "";
+
+    modal.classList.add("show");
+
+  }
+
+
+  function openEditModal(goal) {
+
+    editingGoalId = goal.id;
+
+    modalTitle.textContent =
+      "Modifier mon objectif";
+
+    submitGoalButton.textContent =
+      "Enregistrer les modifications";
+
+    document
+      .getElementById("goalTitle")
+      .value =
+        goal.title || "";
+
+    document
+      .getElementById("goalCategory")
+      .value =
+        goal.category || "";
+
+    document
+      .getElementById("targetDate")
+      .value =
+        goal.target_date || "";
+
+    document
+      .getElementById("currentLevel")
+      .value =
+        goal.current_level || "";
+
+    document
+      .getElementById("desiredResult")
+      .value =
+        goal.desired_result || "";
+
+    document
+      .getElementById("weeklyTime")
+      .value =
+        goal.weekly_time ?? "";
+
+    modalMessage.className =
+      "message";
+
+    modalMessage.textContent =
+      "";
 
     modal.classList.add("show");
 
@@ -837,25 +952,34 @@
 
     modal.classList.remove("show");
 
+    editingGoalId = null;
+
     goalForm.reset();
+
+    modalTitle.textContent =
+      "Nouvel objectif";
+
+    submitGoalButton.textContent =
+      "Enregistrer mon objectif";
 
     modalMessage.className =
       "message";
 
-    modalMessage.textContent = "";
+    modalMessage.textContent =
+      "";
 
   }
 
 
   openModalButton.addEventListener(
     "click",
-    openModal
+    openCreateModal
   );
 
 
   emptyAddButton.addEventListener(
     "click",
-    openModal
+    openCreateModal
   );
 
 
@@ -870,9 +994,7 @@
     function(event) {
 
       if (event.target === modal) {
-
         closeModal();
-
       }
 
     }
@@ -884,7 +1006,8 @@
     type
   ) {
 
-    modalMessage.textContent = text;
+    modalMessage.textContent =
+      text;
 
     modalMessage.className =
       "message show " + type;
@@ -948,6 +1071,8 @@
 
     } catch (error) {
 
+      console.error(error);
+
       window.location.href =
         "login.html";
 
@@ -972,7 +1097,10 @@
       await window.tasklySupabase
         .from("goals")
         .select("*")
-        .eq("user_id", currentUser.id)
+        .eq(
+          "user_id",
+          currentUser.id
+        )
         .order(
           "created_at",
           {
@@ -999,7 +1127,8 @@
       emptyState.style.display =
         "block";
 
-      goalsList.innerHTML = "";
+      goalsList.innerHTML =
+        "";
 
       return;
 
@@ -1009,8 +1138,8 @@
     emptyState.style.display =
       "none";
 
-
-    goalsList.innerHTML = "";
+    goalsList.innerHTML =
+      "";
 
 
     data.forEach(function(goal) {
@@ -1062,44 +1191,73 @@
 
         </div>
 
-        <button
-          class="delete-goal"
-          data-id="${goal.id}"
-        >
-          Supprimer
-        </button>
+
+        <div class="goal-actions">
+
+          <button
+            type="button"
+            class="edit-goal"
+            data-id="${escapeHtml(goal.id)}"
+          >
+            Modifier
+          </button>
+
+          <button
+            type="button"
+            class="delete-goal"
+            data-id="${escapeHtml(goal.id)}"
+          >
+            Supprimer
+          </button>
+
+        </div>
 
       `;
 
 
       goalsList.appendChild(element);
 
+
+      const editButton =
+        element.querySelector(".edit-goal");
+
+
+      const deleteButton =
+        element.querySelector(".delete-goal");
+
+
+      editButton.addEventListener(
+        "click",
+        function() {
+
+          openEditModal(goal);
+
+        }
+      );
+
+
+      deleteButton.addEventListener(
+        "click",
+        function() {
+
+          deleteGoal(
+            goal.id
+          );
+
+        }
+      );
+
     });
-
-
-    document
-      .querySelectorAll(".delete-goal")
-      .forEach(function(button) {
-
-        button.addEventListener(
-          "click",
-          function() {
-
-            deleteGoal(
-              button.dataset.id
-            );
-
-          }
-        );
-
-      });
 
   }
 
 
   function escapeHtml(value) {
 
-    if (value === null || value === undefined) {
+    if (
+      value === null ||
+      value === undefined
+    ) {
 
       return "";
 
@@ -1108,15 +1266,30 @@
 
     return String(value)
 
-      .replaceAll("&", "&amp;")
+      .replaceAll(
+        "&",
+        "&amp;"
+      )
 
-      .replaceAll("<", "&lt;")
+      .replaceAll(
+        "<",
+        "&lt;"
+      )
 
-      .replaceAll(">", "&gt;")
+      .replaceAll(
+        ">",
+        "&gt;"
+      )
 
-      .replaceAll('"', "&quot;")
+      .replaceAll(
+        '"',
+        "&quot;"
+      )
 
-      .replaceAll("'", "&#039;");
+      .replaceAll(
+        "'",
+        "&#039;"
+      );
 
   }
 
@@ -1185,44 +1358,118 @@
           : null;
 
 
+      if (!title) {
+
+        showModalMessage(
+          "Indique un objectif.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
       submitGoalButton.disabled =
         true;
 
+
       submitGoalButton.textContent =
-        "Enregistrement...";
+        editingGoalId
+          ? "Modification..."
+          : "Enregistrement...";
 
 
       try {
 
-        const {
-          error
-        } =
-          await window.tasklySupabase
-            .from("goals")
-            .insert({
+        let result;
 
-              user_id:
-                currentUser.id,
 
-              title:
-                title,
+        if (editingGoalId) {
 
-              category:
-                category,
+          /*
+            MODIFICATION
 
-              target_date:
-                targetDate || null,
+            On utilise à la fois :
+            - l'id de l'objectif
+            - le user_id de l'utilisateur connecté
 
-              current_level:
-                currentLevel || null,
+            La RLS Supabase reste également active.
+          */
 
-              desired_result:
-                desiredResult || null,
+          result =
+            await window.tasklySupabase
+              .from("goals")
+              .update({
 
-              weekly_time:
-                weeklyTime
+                title:
+                  title,
 
-            });
+                category:
+                  category,
+
+                target_date:
+                  targetDate || null,
+
+                current_level:
+                  currentLevel || null,
+
+                desired_result:
+                  desiredResult || null,
+
+                weekly_time:
+                  weeklyTime
+
+              })
+              .eq(
+                "id",
+                editingGoalId
+              )
+              .eq(
+                "user_id",
+                currentUser.id
+              );
+
+
+        } else {
+
+          /*
+            CRÉATION
+          */
+
+          result =
+            await window.tasklySupabase
+              .from("goals")
+              .insert({
+
+                user_id:
+                  currentUser.id,
+
+                title:
+                  title,
+
+                category:
+                  category,
+
+                target_date:
+                  targetDate || null,
+
+                current_level:
+                  currentLevel || null,
+
+                desired_result:
+                  desiredResult || null,
+
+                weekly_time:
+                  weeklyTime
+
+              });
+
+        }
+
+
+        const error =
+          result.error;
 
 
         if (error) {
@@ -1230,16 +1477,11 @@
           console.error(error);
 
           showModalMessage(
-            "Impossible d'enregistrer l'objectif : " +
-            error.message,
+            editingGoalId
+              ? "Impossible de modifier l'objectif : " + error.message
+              : "Impossible d'enregistrer l'objectif : " + error.message,
             "error"
           );
-
-          submitGoalButton.disabled =
-            false;
-
-          submitGoalButton.textContent =
-            "Enregistrer mon objectif";
 
           return;
 
@@ -1261,14 +1503,15 @@
           "error"
         );
 
+      } finally {
+
+        submitGoalButton.disabled =
+          false;
+
+        submitGoalButton.textContent =
+          "Enregistrer mon objectif";
+
       }
-
-
-      submitGoalButton.disabled =
-        false;
-
-      submitGoalButton.textContent =
-        "Enregistrer mon objectif";
 
     }
   );
@@ -1293,7 +1536,10 @@
       await window.tasklySupabase
         .from("goals")
         .delete()
-        .eq("id", id)
+        .eq(
+          "id",
+          id
+        )
         .eq(
           "user_id",
           currentUser.id
