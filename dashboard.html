@@ -64,6 +64,10 @@
       font-weight: 600;
     }
 
+    .logout:hover {
+      background: #e8e8ed;
+    }
+
     main {
       max-width: 1100px;
       margin: auto;
@@ -265,6 +269,76 @@
       font-weight: 700;
     }
 
+    /* PROGRESSION */
+
+    .progress-section {
+      margin-top: 18px;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      margin-bottom: 8px;
+    }
+
+    .progress-label {
+      color: #777a83;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .progress-value {
+      color: #635bff;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 9px;
+
+      background: #ececf2;
+
+      border-radius: 999px;
+
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+
+      background: #635bff;
+
+      border-radius: 999px;
+
+      transition: width 0.3s ease;
+    }
+
+    .progress-button {
+      margin-top: 10px;
+
+      border: none;
+
+      background: transparent;
+
+      color: #635bff;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      padding: 0;
+    }
+
+    .progress-button:hover {
+      text-decoration: underline;
+    }
+
     .goal-actions {
       display: flex;
       align-items: center;
@@ -310,6 +384,8 @@
       background: #ffe5e5;
     }
 
+    /* MODALES */
+
     .modal {
       position: fixed;
 
@@ -344,6 +420,10 @@
       max-height: 90vh;
 
       overflow-y: auto;
+    }
+
+    .progress-modal-card {
+      max-width: 430px;
     }
 
     .modal-header {
@@ -414,6 +494,34 @@
       border-color: #635bff;
     }
 
+    .progress-input {
+      text-align: center;
+
+      font-size: 30px !important;
+
+      font-weight: 800;
+
+      color: #635bff;
+    }
+
+    .progress-range {
+      width: 100%;
+
+      accent-color: #635bff;
+
+      margin-top: 10px;
+    }
+
+    .progress-preview {
+      text-align: center;
+
+      margin: 18px 0;
+
+      font-size: 14px;
+
+      color: #777a83;
+    }
+
     .modal-submit {
       width: 100%;
 
@@ -434,6 +542,10 @@
       cursor: pointer;
 
       margin-top: 5px;
+    }
+
+    .modal-submit:hover {
+      opacity: 0.92;
     }
 
     .modal-submit:disabled {
@@ -584,12 +696,15 @@
 
         <div>
 
-          <div class="stat-number">
-            0
+          <div
+            class="stat-number"
+            id="averageProgress"
+          >
+            0%
           </div>
 
           <div class="stat-label">
-            Jours actifs
+            Progression moyenne
           </div>
 
         </div>
@@ -828,6 +943,88 @@
 </div>
 
 
+<!-- MODALE PROGRESSION -->
+
+<div
+  id="progressModal"
+  class="modal"
+>
+
+  <div class="modal-card progress-modal-card">
+
+
+    <div class="modal-header">
+
+      <h2>
+        📊 Ma progression
+      </h2>
+
+      <button
+        id="closeProgressModalButton"
+        class="close"
+        type="button"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      id="progressMessage"
+      class="message"
+    ></div>
+
+
+    <div class="form-group">
+
+      <label for="progressInput">
+        Pourcentage de progression
+      </label>
+
+      <input
+        id="progressInput"
+        class="progress-input"
+        type="number"
+        min="0"
+        max="100"
+        value="0"
+      >
+
+      <input
+        id="progressRange"
+        class="progress-range"
+        type="range"
+        min="0"
+        max="100"
+        value="0"
+      >
+
+    </div>
+
+
+    <div
+      id="progressPreview"
+      class="progress-preview"
+    >
+      Tu es à 0 % de ton objectif.
+    </div>
+
+
+    <button
+      id="saveProgressButton"
+      class="modal-submit"
+      type="button"
+    >
+      Enregistrer la progression
+    </button>
+
+
+  </div>
+
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="supabase.js"></script>
@@ -839,9 +1036,15 @@
 
   let editingGoalId = null;
 
+  let progressGoalId = null;
+
 
   const modal =
     document.getElementById("goalModal");
+
+  const progressModal =
+    document.getElementById("progressModal");
+
 
   const openModalButton =
     document.getElementById("openModalButton");
@@ -851,6 +1054,10 @@
 
   const closeModalButton =
     document.getElementById("closeModalButton");
+
+  const closeProgressModalButton =
+    document.getElementById("closeProgressModalButton");
+
 
   const goalForm =
     document.getElementById("goalForm");
@@ -864,14 +1071,36 @@
   const goalCount =
     document.getElementById("goalCount");
 
+  const averageProgress =
+    document.getElementById("averageProgress");
+
+
   const modalMessage =
     document.getElementById("modalMessage");
+
+  const progressMessage =
+    document.getElementById("progressMessage");
+
 
   const submitGoalButton =
     document.getElementById("submitGoalButton");
 
+  const saveProgressButton =
+    document.getElementById("saveProgressButton");
+
+
   const modalTitle =
     document.getElementById("modalTitle");
+
+
+  const progressInput =
+    document.getElementById("progressInput");
+
+  const progressRange =
+    document.getElementById("progressRange");
+
+  const progressPreview =
+    document.getElementById("progressPreview");
 
 
   function openCreateModal() {
@@ -907,35 +1136,42 @@
     submitGoalButton.textContent =
       "Enregistrer les modifications";
 
+
     document
       .getElementById("goalTitle")
       .value =
         goal.title || "";
+
 
     document
       .getElementById("goalCategory")
       .value =
         goal.category || "";
 
+
     document
       .getElementById("targetDate")
       .value =
         goal.target_date || "";
+
 
     document
       .getElementById("currentLevel")
       .value =
         goal.current_level || "";
 
+
     document
       .getElementById("desiredResult")
       .value =
         goal.desired_result || "";
 
+
     document
       .getElementById("weeklyTime")
       .value =
         goal.weekly_time ?? "";
+
 
     modalMessage.className =
       "message";
@@ -971,6 +1207,98 @@
   }
 
 
+  function openProgressModal(goal) {
+
+    progressGoalId =
+      goal.id;
+
+
+    let progress =
+      Number(goal.progress);
+
+
+    if (
+      !Number.isFinite(progress)
+    ) {
+
+      progress = 0;
+
+    }
+
+
+    progress =
+      Math.max(
+        0,
+        Math.min(
+          100,
+          progress
+        )
+      );
+
+
+    progressInput.value =
+      progress;
+
+    progressRange.value =
+      progress;
+
+
+    progressMessage.className =
+      "message";
+
+    progressMessage.textContent =
+      "";
+
+
+    updateProgressPreview(
+      progress
+    );
+
+
+    progressModal.classList.add(
+      "show"
+    );
+
+  }
+
+
+  function closeProgressModal() {
+
+    progressModal.classList.remove(
+      "show"
+    );
+
+    progressGoalId = null;
+
+    progressMessage.className =
+      "message";
+
+    progressMessage.textContent =
+      "";
+
+  }
+
+
+  function updateProgressPreview(
+    value
+  ) {
+
+    const progress =
+      Math.max(
+        0,
+        Math.min(
+          100,
+          Number(value) || 0
+        )
+      );
+
+
+    progressPreview.textContent =
+      `Tu es à ${progress} % de ton objectif.`;
+
+  }
+
+
   openModalButton.addEventListener(
     "click",
     openCreateModal
@@ -989,13 +1317,93 @@
   );
 
 
+  closeProgressModalButton.addEventListener(
+    "click",
+    closeProgressModal
+  );
+
+
   modal.addEventListener(
     "click",
     function(event) {
 
-      if (event.target === modal) {
+      if (
+        event.target === modal
+      ) {
+
         closeModal();
+
       }
+
+    }
+  );
+
+
+  progressModal.addEventListener(
+    "click",
+    function(event) {
+
+      if (
+        event.target === progressModal
+      ) {
+
+        closeProgressModal();
+
+      }
+
+    }
+  );
+
+
+  progressRange.addEventListener(
+    "input",
+    function() {
+
+      progressInput.value =
+        progressRange.value;
+
+      updateProgressPreview(
+        progressRange.value
+      );
+
+    }
+  );
+
+
+  progressInput.addEventListener(
+    "input",
+    function() {
+
+      let value =
+        Number(progressInput.value);
+
+
+      if (
+        !Number.isFinite(value)
+      ) {
+
+        value = 0;
+
+      }
+
+
+      value =
+        Math.max(
+          0,
+          Math.min(
+            100,
+            value
+          )
+        );
+
+
+      progressRange.value =
+        value;
+
+
+      updateProgressPreview(
+        value
+      );
 
     }
   );
@@ -1010,6 +1418,20 @@
       text;
 
     modalMessage.className =
+      "message show " + type;
+
+  }
+
+
+  function showProgressMessage(
+    text,
+    type
+  ) {
+
+    progressMessage.textContent =
+      text;
+
+    progressMessage.className =
       "message show " + type;
 
   }
@@ -1122,6 +1544,53 @@
       data.length;
 
 
+    let totalProgress = 0;
+
+
+    data.forEach(function(goal) {
+
+      let progress =
+        Number(goal.progress);
+
+
+      if (
+        !Number.isFinite(progress)
+      ) {
+
+        progress = 0;
+
+      }
+
+
+      progress =
+        Math.max(
+          0,
+          Math.min(
+            100,
+            progress
+          )
+        );
+
+
+      totalProgress +=
+        progress;
+
+    });
+
+
+    const average =
+      data.length > 0
+        ? Math.round(
+            totalProgress /
+            data.length
+          )
+        : 0;
+
+
+    averageProgress.textContent =
+      average + "%";
+
+
     if (data.length === 0) {
 
       emptyState.style.display =
@@ -1173,6 +1642,29 @@
       }
 
 
+      let progress =
+        Number(goal.progress);
+
+
+      if (
+        !Number.isFinite(progress)
+      ) {
+
+        progress = 0;
+
+      }
+
+
+      progress =
+        Math.max(
+          0,
+          Math.min(
+            100,
+            progress
+          )
+        );
+
+
       element.innerHTML = `
 
         <div class="goal-info">
@@ -1188,6 +1680,42 @@
           <p>
             ${escapeHtml(dateText)}
           </p>
+
+
+          <div class="progress-section">
+
+            <div class="progress-header">
+
+              <span class="progress-label">
+                Progression
+              </span>
+
+              <span class="progress-value">
+                ${progress}%
+              </span>
+
+            </div>
+
+
+            <div class="progress-bar">
+
+              <div
+                class="progress-fill"
+                style="width: ${progress}%"
+              ></div>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="progress-button"
+              data-id="${escapeHtml(goal.id)}"
+            >
+              Modifier la progression
+            </button>
+
+          </div>
 
         </div>
 
@@ -1215,22 +1743,36 @@
       `;
 
 
-      goalsList.appendChild(element);
+      goalsList.appendChild(
+        element
+      );
 
 
       const editButton =
-        element.querySelector(".edit-goal");
+        element.querySelector(
+          ".edit-goal"
+        );
 
 
       const deleteButton =
-        element.querySelector(".delete-goal");
+        element.querySelector(
+          ".delete-goal"
+        );
+
+
+      const progressButton =
+        element.querySelector(
+          ".progress-button"
+        );
 
 
       editButton.addEventListener(
         "click",
         function() {
 
-          openEditModal(goal);
+          openEditModal(
+            goal
+          );
 
         }
       );
@@ -1242,6 +1784,18 @@
 
           deleteGoal(
             goal.id
+          );
+
+        }
+      );
+
+
+      progressButton.addEventListener(
+        "click",
+        function() {
+
+          openProgressModal(
+            goal
           );
 
         }
@@ -1387,16 +1941,6 @@
 
         if (editingGoalId) {
 
-          /*
-            MODIFICATION
-
-            On utilise à la fois :
-            - l'id de l'objectif
-            - le user_id de l'utilisateur connecté
-
-            La RLS Supabase reste également active.
-          */
-
           result =
             await window.tasklySupabase
               .from("goals")
@@ -1433,10 +1977,6 @@
 
         } else {
 
-          /*
-            CRÉATION
-          */
-
           result =
             await window.tasklySupabase
               .from("goals")
@@ -1461,7 +2001,10 @@
                   desiredResult || null,
 
                 weekly_time:
-                  weeklyTime
+                  weeklyTime,
+
+                progress:
+                  0
 
               });
 
@@ -1510,6 +2053,119 @@
 
         submitGoalButton.textContent =
           "Enregistrer mon objectif";
+
+      }
+
+    }
+  );
+
+
+  saveProgressButton.addEventListener(
+    "click",
+    async function() {
+
+      if (
+        !currentUser ||
+        !progressGoalId
+      ) {
+
+        return;
+
+      }
+
+
+      let progress =
+        Number(progressInput.value);
+
+
+      if (
+        !Number.isFinite(progress)
+      ) {
+
+        progress = 0;
+
+      }
+
+
+      progress =
+        Math.round(
+          Math.max(
+            0,
+            Math.min(
+              100,
+              progress
+            )
+          )
+        );
+
+
+      saveProgressButton.disabled =
+        true;
+
+      saveProgressButton.textContent =
+        "Enregistrement...";
+
+
+      try {
+
+        const {
+          error
+        } =
+          await window.tasklySupabase
+            .from("goals")
+            .update({
+
+              progress:
+                progress
+
+            })
+            .eq(
+              "id",
+              progressGoalId
+            )
+            .eq(
+              "user_id",
+              currentUser.id
+            );
+
+
+        if (error) {
+
+          console.error(error);
+
+          showProgressMessage(
+            "Impossible d'enregistrer la progression : " +
+            error.message,
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        closeProgressModal();
+
+        await loadGoals();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showProgressMessage(
+          "Une erreur est survenue : " +
+          error.message,
+          "error"
+        );
+
+      } finally {
+
+        saveProgressButton.disabled =
+          false;
+
+        saveProgressButton.textContent =
+          "Enregistrer la progression";
 
       }
 
